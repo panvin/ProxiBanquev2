@@ -21,7 +21,7 @@ public class AuthService {
 
 		Conseiller conseiller = ConseillerDao.readConseillerByLogin(login);
 
-		if (conseiller.getLogin() == null) {
+		if (conseiller == null || conseiller.getLogin() == null) {
 			return false;
 		}
 
