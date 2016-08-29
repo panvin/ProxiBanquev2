@@ -1,12 +1,19 @@
 package com.clementvincent2software.proxibanquesi.service;
 
 import com.clementvincent2software.proxibanquesi.dao.ClientDao;
+import com.clementvincent2software.proxibanquesi.dao.CompteDao;
 import com.clementvincent2software.proxibanquesi.domaine.Client;
 import com.clementvincent2software.proxibanquesi.domaine.Compte;
 import com.clementvincent2software.proxibanquesi.domaine.CompteCourant;
 import com.clementvincent2software.proxibanquesi.domaine.CompteEpargne;
-import com.clementvincent2software.proxibanquesi.domaine.Date;
 
+/**
+ * Classe de la couche service dédié à tout ce qui concerne les comptes.
+ * Cette classe permet de traiter les comptes clients: ajouter des comptes (créer), modifier des comptes, supprimer des comptes, consulter des comptes. 
+ * Ce service permet egalement de réaliser des virements comptes à comptes entre les clients de l'etablissment. 
+ * @author Clement CASTRO et Vincent PANOUILLERES
+ *
+ */
 public class CompteService {
 	
 	/**
@@ -19,7 +26,7 @@ public class CompteService {
 	 * @return Retourne un booleen: true si le compte est cree et ajoute, false sinon
 	 */
 	public boolean ajouterCompte(Client client, String typeCompte, String numero, float solde,
-			Date dateOuverture) {
+			String dateOuverture) {
 
 		switch (typeCompte) {
 		case "Courant":
@@ -42,11 +49,11 @@ public class CompteService {
 	 * @param dateOuverture La Date d'ouverture du compte
 	 * @return Retourne un boleen: true: creation reussie sinon false.
 	 */
-	public boolean creerCompteCourant(Client client, String numero, float solde, Date dateOuverture) {
+	public boolean creerCompteCourant(Client client, String numero, float solde, String dateOuverture) {
 		if (client.getCompteCourant() == null) {
 			CompteCourant compteCourantClient = new CompteCourant(numero, solde, dateOuverture, client);
 			client.setCompteCourant(compteCourantClient);
-			CompteDao.createAccount(compteCourantClient, "Courant", client.getId());
+			CompteDao.createCompte(compteCourantClient, "Courant", client.getId());
 			ClientDao.updateClientById(client.getId(), client);
 			return true;
 		} else {
@@ -63,11 +70,11 @@ public class CompteService {
 	 * @param compteEntreprise Est-ce un compte entreprise: si oui true sinon false
 	 * @return Retourne un boleen: true: creation reussie sinon false.
 	 */
-	public boolean creerCompteEpargne(Client client, String numero, float soldeDepart, Date dateOuverture) { 
+	public boolean creerCompteEpargne(Client client, String numero, float soldeDepart, String dateOuverture) { 
 		if (client.getCompteEpargne() == null) {
 			CompteEpargne compteEpargneClient = new CompteEpargne(numero, soldeDepart, dateOuverture, client);
 			client.setCompteEpargne((CompteEpargne)compteEpargneClient);
-			CompteDao.createAccount(compteEpargneClient, "Epargne", client.getId());
+			CompteDao.createCompte(compteEpargneClient, "Epargne", client.getId());
 			ClientDao.updateClientById(client.getId(), client);
 			return true;
 		} else {
@@ -81,20 +88,39 @@ public class CompteService {
 	 * @param compteACrediter Le compte à crediter
 	 * @param montant Le montant du virement.
 	 */
-	public void virementCompteACompte(Compte compteADebiter, Compte compteACrediter, float montant){
+	public void virementCompteACompte(String numCompteADebiter, String numCompteACrediter, float montant){
 		
-		compteADebiter.setSolde(compteADebiter.getSolde() - montant);		
-		compteACrediter.setSolde(compteACrediter.getSolde() + montant);
-		CompteDao.updateCompteByNumber(compteADebiter.getNumero(), compteADebiter);
-		CompteDao.updateCompteByNumber(compteACrediter.getNumero(), compteACrediter);
+		float soldeCompteADebiter = CompteDao.readCompteByNum(numCompteADebiter).getSolde() - montant;
+		float soldeCompteACrediter = CompteDao.readCompteByNum(numCompteACrediter).getSolde() + montant;
+
+		CompteDao.updateCompteByNum(numCompteADebiter, soldeCompteADebiter);
+		CompteDao.updateCompteByNum(numCompteACrediter, soldeCompteACrediter);
 	}
 	
+	/**
+	 * Cette méthode permet de supprimer un compte de la base de donnée à partir du numero de compte
+	 * @param numeroCompte Le numero du compte à supprimer.
+	 */
 	public void supprimerCompte(String numeroCompte){
-		CompteDao.deleteAccountByNumber(numeroCompte);		
+		CompteDao.deleteCompteByNum(numeroCompte);		
 	}
 	
+	/**
+	 * Cette méthode permet de consulter les informations relatives à un compte et de les retourner sous forme d'objet Compte
+	 * @param numeroCompte Le numero de compte dont on souhaite visualiser les infos
+	 * @return Retourne l'objet compte demande.
+	 */
 	public Compte consulterCompte(String numeroCompte){
-		Compte compteDemande = CompteDao.getAccountByNumber(numeroCompte);
+		Compte compteDemande = CompteDao.readCompteByNum(numeroCompte);
 		return compteDemande;
+	}
+	
+	/**
+	 * Cette methode permet de mettre à jour les donnes du compte en banque à partir de son numero.
+	 * @param compteAModifier L'objet compte dont on souhaite faire une modification.
+	 * @param montant Le montant de la transaction effectué sur le compte.
+	 */
+	public void modifierCompte(String numeroCompte, float montant){
+		CompteDao.updateCompteByNum(numeroCompte, montant);
 	}
 }

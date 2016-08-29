@@ -7,7 +7,7 @@ import com.clementvincent2software.proxibanquesi.dao.ClientDao;
 
 /**
  * Classe du domaine service qui concerne l'ensemble des services Clients
- * Cette classe va permettre d'a
+ * Cette classe va permettre de: modifier, supprimer, creer, lire unclient et egalement d'obtenir la liste de tous les clients.
  * @author Clement CASTRO et Vincent PANOUILLERES
  *
  */
