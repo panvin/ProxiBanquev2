@@ -3,22 +3,28 @@ package com.clementvincent2software.proxibanquesi.service;
 import java.util.ArrayList;
 
 import com.clementvincent2software.proxibanquesi.domaine.Client;
+import com.clementvincent2software.proxibanquesi.dao.ClientDao;
 
 public class ClientService {
 	
-	public void creerClient (Client client){
+	public boolean creerClient (Client client){
+		
+		ClientDao.createClient(client);
+		
+		return false;
+	}
+	
+	public boolean modificationClient(int id, Client client){
+		return false;
 		
 	}
 	
-	public void modificationClient(Client client){
+	public boolean suppressionClient(Client client){
+		return false;
 		
 	}
 	
-	public void suppressionClient(Client client){
-		
-	}
-	
-	public Client lireClient(String id){
+	public Client lireClient(int i){
 		
 		return null;
 	}
