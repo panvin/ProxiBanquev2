@@ -163,7 +163,7 @@ public class ClientDao {
 	 * @param idInit identifiant du client
 	 * @return
 	 */
-	public static Client readClientById(String idInit) {
+	public static Client readClientById(int idInit) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/formation";
 		String login = "root";
@@ -215,7 +215,7 @@ public class ClientDao {
 	 * @param idInit identifiant du Client à mettre à jour
 	 * @param newClient Objet Client contenant les nouvelles informations
 	 */
-	public static void updateClientById(String idInit, Client newClient){
+	public static void updateClientById(int idInit, Client newClient){
 		// INformation d'acces à la base de donnees
 				String url = "jdbc:mysql://localhost/formation";
 				String login = "root";
@@ -252,7 +252,7 @@ public class ClientDao {
 	 * Méthode permettant de supprimer un client à partir de son identifiant
 	 * @param idInit identifiant du client à supprimer
 	 */
-	public static void deleteClientById(String idInit){
+	public static void deleteClientById(int idInit){
 		// INformation d'acces à la base de donnees
 				String url = "jdbc:mysql://localhost/formation";
 				String login = "root";
