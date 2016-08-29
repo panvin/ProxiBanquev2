@@ -61,7 +61,7 @@ public class ClientDao {
 	 */
 	public static Collection<Client> readAllClient() {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -113,7 +113,7 @@ public class ClientDao {
 	 */
 	public static Collection<Client> readClientByConseiller(String logInit){
 		// INformation d'acces à la base de donnees
-				String url = "jdbc:mysql://localhost/formation";
+				String url = "jdbc:mysql://localhost/ProxiBanque";
 				String login = "root";
 				String passwd = "";
 				Connection cn = null;
@@ -165,7 +165,7 @@ public class ClientDao {
 	 */
 	public static Client readClientById(int idInit) {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -217,7 +217,7 @@ public class ClientDao {
 	 */
 	public static void updateClientById(int idInit, Client newClient){
 		// INformation d'acces à la base de donnees
-				String url = "jdbc:mysql://localhost/formation";
+				String url = "jdbc:mysql://localhost/ProxiBanque";
 				String login = "root";
 				String passwd = "";
 				Connection cn = null;
@@ -254,7 +254,7 @@ public class ClientDao {
 	 */
 	public static void deleteClientById(int idInit){
 		// INformation d'acces à la base de donnees
-				String url = "jdbc:mysql://localhost/formation";
+				String url = "jdbc:mysql://localhost/ProxiBanque";
 				String login = "root";
 				String passwd = "";
 				Connection cn = null;

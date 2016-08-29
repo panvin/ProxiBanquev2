@@ -62,7 +62,7 @@ public class ConseillerDao {
 	 */
 	public static Conseiller readConseillerByLogin(String loginInit) {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -115,7 +115,7 @@ public class ConseillerDao {
 	 */
 	public static void updateConseillerByLogin(String loginInit, Conseiller newConseiller){
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -153,7 +153,7 @@ public class ConseillerDao {
 	 */
 	public static void deleteConseillerByLogin(String loginInit){
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
