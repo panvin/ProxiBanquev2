@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.clementvincent2software.proxibanquesi.domaine.Client;
+import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.ClientService;
 
 public class ClientServiceTest {
@@ -19,7 +20,7 @@ public class ClientServiceTest {
 	@Before
 	public void avantChaqueTest(){
 		
-		client1 = new Client("Dupond", "Francois", "Mr", "duponf@proxibanque.com", "120 rue massena", "Lyon", "0102030405", "69003");
+		client1 = new Client("Dupond", "Francois", "Mr", "duponf@proxibanque.com", "120 rue massena", "Lyon", "0102030405", "69003", 1, new Conseiller("Dupond", "Jean", "Mr", "jdupond", "1234"));
 		clientService = new ClientService();
 	}
 
@@ -66,7 +67,7 @@ public class ClientServiceTest {
 	@Test
 	public void testSuppressionClient() {
 		
-		boolean status = clientService.suppressionClient(client1);
+		boolean status = clientService.suppressionClient(client1.getId());
 		Assert.assertTrue(status);
 		
 	}

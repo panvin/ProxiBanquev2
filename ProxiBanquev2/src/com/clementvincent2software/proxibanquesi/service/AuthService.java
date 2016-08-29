@@ -19,7 +19,7 @@ public class AuthService {
 	 */
 	public boolean authConseiller(String login, String pwd) {
 
-		Conseiller conseiller = ConseillerDao.lireParLogin(login);
+		Conseiller conseiller = ConseillerDao.readConseillerByLogin(login);
 
 		if (conseiller.getLogin() == null) {
 			return false;
