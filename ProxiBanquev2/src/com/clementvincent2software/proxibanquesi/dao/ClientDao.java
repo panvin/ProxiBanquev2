@@ -10,14 +10,14 @@ import java.util.Collection;
 import com.clementvincent2software.proxibanquesi.domaine.Client;
 
 /**
- * Classe ClientDao
+ * Classe ClientDao, permet la gestion des Clients en base
  * @author Clement CASTRO et Vincent PANOUILLERES
  *
  */
 public class ClientDao {
 
 	/**
-	 * Méthode permettant la création d'un nouveau client en base
+	 * Méthode permettant la création en base d'un nouveau client en base
 	 * @param client
 	 */
 	public static void createClient(Client client) {
@@ -56,8 +56,8 @@ public class ClientDao {
 	}
 
 	/**
-	 * Méthode permettant de récupérer les informations de tout les clients
-	 * @return
+	 * Méthode permettant de récupérer en base les informations de tout les clients
+	 * @return collection de Client
 	 */
 	public static Collection<Client> readAllClient() {
 		// INformation d'acces à la base de donnees
@@ -107,9 +107,9 @@ public class ClientDao {
 	}
 
 	/**
-	 * Méthode permettant de récupérer la liste des clients d'un conseiller à partir de son login
+	 * Méthode permettant de récupérer en base la liste des clients d'un conseiller à partir de son login
 	 * @param logInit login du conseiller
-	 * @return
+	 * @return Collection de Client
 	 */
 	public static Collection<Client> readClientByConseiller(String logInit){
 		// INformation d'acces à la base de donnees
@@ -159,9 +159,9 @@ public class ClientDao {
 			}
 
 	/**
-	 * Méthode permettant de récupérer les informations d'un Client à partir de son identifiant
+	 * Méthode permettant de récupérer en base les informations d'un Client à partir de son identifiant
 	 * @param idInit identifiant du client
-	 * @return
+	 * @return Client
 	 */
 	public static Client readClientById(int idInit) {
 		// INformation d'acces à la base de donnees
@@ -211,7 +211,7 @@ public class ClientDao {
 	}
 
 	/**
-	 * Méthode permettant de mettre à jour un client à partir de son identifiant
+	 * Méthode permettant de mettre à jour en base un client à partir de son identifiant
 	 * @param idInit identifiant du Client à mettre à jour
 	 * @param newClient Objet Client contenant les nouvelles informations
 	 */
@@ -249,7 +249,7 @@ public class ClientDao {
 			}
 
 	/**
-	 * Méthode permettant de supprimer un client à partir de son identifiant
+	 * Méthode permettant de supprimer en base un client à partir de son identifiant
 	 * @param idInit identifiant du client à supprimer
 	 */
 	public static void deleteClientById(int idInit){
@@ -267,7 +267,7 @@ public class ClientDao {
 					cn = DriverManager.getConnection(url, login, passwd);
 					// Etape 3 : Creation d'un statement
 					st = cn.createStatement();
-					String sql = "DELETE FROM user WHERE login ="+idInit+";";
+					String sql = "DELETE FROM Client WHERE id ="+idInit+";";
 					// Etape 4: Execution requête
 					st.executeUpdate(sql);
 				} catch (SQLException e) {

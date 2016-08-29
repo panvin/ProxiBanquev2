@@ -9,11 +9,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 
+/**
+ * Classe ConseillerDao, permet la gestion des Conseillers en base
+ * @author Clement CASTRO et Vincent PANOUILLERES
+ *
+ */
 public class ConseillerDao {
 	
 	/**
-	 * Méthode permettant la création d'un nouveau client en base
-	 * @param client
+	 * Méthode permettant la création en base d'un nouveau conseiller en base
+	 * @param conseiller
 	 */
 	public static void createConseiller(Conseiller conseiller) {
 		// INfomration d'accès à la base de données
@@ -50,6 +55,10 @@ public class ConseillerDao {
 		}
 	}
 
+	/**
+	 * Méthode permettant de récupérer les informations en base de tout les conseiller de proxibanque
+	 * @return collection de Conseiller
+	 */
 	public static Collection<Conseiller> readAllConseiller() {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/formation";
@@ -97,6 +106,11 @@ public class ConseillerDao {
 		return collection;
 	}
 
+	/**
+	 * Méthode permettant de récupérer les informations en base d'un conseiller à partir de son login
+	 * @param loginInit Login du conseiller
+	 * @return conseiller
+	 */
 	public static Conseiller readConseillerByLogin(String loginInit) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/formation";
@@ -143,6 +157,82 @@ public class ConseillerDao {
 			}
 		}
 		return conseiller;
+	}
+
+	/**
+	 * Méthode permettant de mettre à jour en base un conseiller à partir de son login
+	 * @param loginInit  Login du conseiller
+	 * @param newConseiller Objet Conseiller contenant les nouvelles informations
+	 */
+	public static void updateConseillerById(String loginInit, Conseiller newConseiller){
+		// INformation d'acces à la base de donnees
+		String url = "jdbc:mysql://localhost/formation";
+		String login = "root";
+		String passwd = "";
+		Connection cn = null;
+		Statement st = null;
+
+		try {
+			// Etape 1: chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Etape 2 : recuperation de la connexion
+			cn = DriverManager.getConnection(url, login, passwd);
+			// Etape 3 : Creation d'un statement
+			st = cn.createStatement();
+			String sql = "UPDATE Conseiller SET nom = '" + newConseiller.getNom() + "', prenom = '" + newConseiller.getPrenom() + "', civilite = '" + newConseiller.getCivilite() + "', login = '" + newConseiller.getLogin() + "', password = '" + newConseiller.getPassword() + "' WHERE login='"+loginInit+ "';";
+			// Etape 4: Execution requête
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Etape 6 : liberer ressources de la memoire.
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+	/**
+	 * Méthode permettant de supprimer en base un conseiller à partir de son login
+	 * @param loginInit Login du conseiller
+	 */
+	public static void deleteConseillerById(String loginInit){
+		// INformation d'acces à la base de donnees
+		String url = "jdbc:mysql://localhost/formation";
+		String login = "root";
+		String passwd = "";
+		Connection cn = null;
+		Statement st = null;
+
+		try {
+			// Etape 1: chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Etape 2 : recuperation de la connexion
+			cn = DriverManager.getConnection(url, login, passwd);
+			// Etape 3 : Creation d'un statement
+			st = cn.createStatement();
+			String sql = "DELETE FROM Conseiller WHERE login ="+loginInit+";";
+			// Etape 4: Execution requête
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Etape 5 : liberer ressources de la memoire.
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
