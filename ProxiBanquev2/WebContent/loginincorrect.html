@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="ISO-8859-1">
+<!-- Import de BootStrap via CDN  -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/skel-layers.min.js"></script>
+<title>ProxiBanque</title>
+</head>
+
+<body>
+	<!-- Banner -->
+	<section id="banner">
+		<h2>Application ProxiBanque V2</h2>
+		<p>Bienvenue sur l'application ProxiBanque V2, votre outil de
+			gestion clientèle</p>
+		<div class="alert alert-danger" role="alert">Erreur ! Login/Mot de passe incorrect</div>
+		<br>
+		<form class="form-inline">
+		
+			<label for="Login"> Login </label>
+			<div class="form-group has-error has-feedback">
+				<input type="text" class="form-control" id="Login" placeholder="Login">
+				<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+				<span id="inputError2Status" class="sr-only">(error)</span>
+			</div>
+			
+			<label for="MDP"> Mot de passe </label>
+			<div class="form-group has-error has-feedback">
+				<input type="password" class="form-control" id="MDP" placeholder="Mot de passe">
+				<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+			 	<span id="inputError2Status" class="sr-only">(error)</span>
+			</div>
+			
+			<div class="form-group">
+				<button type="submit" class="btn btn-success btn-lg">Espace Conseiller</button>
+			</div>
+			
+		</form>
+	</section>
+
+	<!-- Section 1  -->
+	<section id="one" class="container-fluid">
+		<div class="center">
+			<h2>Gestion clientèle</h2>
+			<p>L'application ProxiBanque V2 vous offre un outil de gestion
+				pour répondre aux besoins de vos clients.</p>
+			<br>
+		</div>
+		<div id="div1" class="center col-xs-4">
+			<span class="glyphicon glyphicon-refresh"></span>
+			<p>L'application ProxiBanque vous permet de mettre à jour les
+				informations clients.</p>
+		</div>
+		<div id="div1" class="center col-xs-4">
+			<span class="glyphicon glyphicon-folder-open"></span>
+			<p>L'application ProxiBanque vous permet de consulter les comptes
+				Courants et Epargnes de vos clients.</p>
+		</div>
+		<div id="div1" class="center col-xs-4">
+			<span class="glyphicon glyphicon-euro"></span>
+			<p>L'application ProxiBanque vous permet d'effectuer pour vos
+				clients des virements entre comptes.</p>
+		</div>
+	</section>
+</body>
+
+</html>
