@@ -5,7 +5,7 @@ package com.clementvincent2software.proxibanquesi.domaine;
  * @author Clement CASTRO et Vincent PANOUILLERES
  */
 public abstract class Personne {
-
+	
 	private String nom;
 	private String prenom;
 	private String civilite;

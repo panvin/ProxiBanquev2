@@ -34,8 +34,10 @@ public class Conseiller extends Personne {
 	 * @param prenom
 	 * @param civilite
 	 */
-	public Conseiller(String nom, String prenom, String civilite) {
+	public Conseiller(String nom, String prenom, String civilite, String login, String password) {
 		super(nom, prenom, civilite);
+		this.login = login;
+		this.password = password;
 	}
 
 	/**

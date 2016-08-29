@@ -8,6 +8,8 @@ public class Client extends Personne {
 	
 	private String email;
 	private Coordonnees coordonnees;
+	private int id;
+	private Conseiller monConseiller;
 	private CompteEpargne compteEpargne;
 	private CompteCourant compteCourant;
 	
@@ -23,14 +25,18 @@ public class Client extends Personne {
 	 * @param ville
 	 * @param telephone
 	 * @param cp
+	 * @param id
+	 * @param monConseiller
 	 * @param compteEpargne
 	 * @param compteCourant
 	 */
 	public Client(String nom, String prenom, String civilite, String email, String adresse, String ville, String telephone, String cp, 
-			CompteEpargne compteEpargne, CompteCourant compteCourant) {
+			int idClient, Conseiller monConseiller, CompteEpargne compteEpargne, CompteCourant compteCourant) {
 		super(nom, prenom, civilite);
 		this.email = email;
 		this.coordonnees =  new Coordonnees(adresse, ville, telephone, cp);
+		this.id = idClient;
+		this.monConseiller = monConseiller;
 		this.compteEpargne = compteEpargne;
 		this.compteCourant = compteCourant;
 	}
@@ -45,11 +51,15 @@ public class Client extends Personne {
 	 * @param ville
 	 * @param telephone
 	 * @param cp
+	 * @param id
+	 * @param monConseiller
 	 */
-	public Client(String nom, String prenom, String civilite, String email, String adresse, String ville, String telephone, String cp) {
+	public Client(String nom, String prenom, String civilite, String email, String adresse, String ville, String telephone, String cp, int idClient, Conseiller monConseiller) {
 		super(nom, prenom, civilite);
 		this.email = email;
 		this.coordonnees =  new Coordonnees(adresse, ville, telephone, cp);
+		this.id = idClient;
+		this.monConseiller = monConseiller;
 		this.compteEpargne = null;
 		this.compteCourant = null;
 	}
@@ -60,8 +70,9 @@ public class Client extends Personne {
 	 * @param prenom
 	 * @param civilite
 	 */
-	public Client(String nom, String prenom, String civilite) {
+	public Client(String nom, String prenom, String civilite, int idClient) {
 		super(nom, prenom, civilite);
+		this.id = idClient;
 	}
 
 	/**
@@ -126,6 +137,38 @@ public class Client extends Personne {
 	 */
 	public void setCompteCourant(CompteCourant compteCourant) {
 		this.compteCourant = compteCourant;
+	}
+
+	/**
+	 * Méthode permettant d'obtenir l'identifiant du client
+	 * @return
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Méthode permettant de modifier l'identifiant du Client
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * Méthode permettant d'obtenir le conseiller du client
+	 * @return
+	 */
+	public Conseiller getMonConseiller() {
+		return monConseiller;
+	}
+
+	/**
+	 * Méthode permettant de modifier le conseiller du client
+	 * @param monConseiller
+	 */
+	public void setMonConseiller(Conseiller monConseiller) {
+		this.monConseiller = monConseiller;
 	}
 	
 	
