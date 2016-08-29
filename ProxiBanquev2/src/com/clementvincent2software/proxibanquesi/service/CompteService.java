@@ -66,7 +66,7 @@ public class CompteService {
 	public boolean creerCompteEpargne(Client client, String numero, float soldeDepart, Date dateOuverture) { 
 		if (client.getCompteEpargne() == null) {
 			CompteEpargne compteEpargneClient = new CompteEpargne(numero, soldeDepart, dateOuverture, client);
-			client.setCompteEpargne(compteEpargneCLient);
+			client.setCompteEpargne((CompteEpargne)compteEpargneClient);
 			CompteDao.createAccount(compteEpargneClient, "Epargne", client.getId());
 			ClientDao.updateClientById(client.getId(), client);
 			return true;
@@ -82,17 +82,15 @@ public class CompteService {
 	 * @param montant Le montant du virement.
 	 */
 	public void virementCompteACompte(Compte compteADebiter, Compte compteACrediter, float montant){
-		if (compteADebiter instanceof CompteCourant && compteADebiter.getSolde() - montant < ((CompteCourant) compteADebiter).getValeurDecouvert()){
-			System.out.println("Le compte a debiter a un decouvert trop important. Virement annule.");
-		}
-		else {
+		
 		compteADebiter.setSolde(compteADebiter.getSolde() - montant);		
 		compteACrediter.setSolde(compteACrediter.getSolde() + montant);
-		}
+		CompteDao.updateCompteByNumber(compteADebiter.getNumero(), compteADebiter);
+		CompteDao.updateCompteByNumber(compteACrediter.getNumero(), compteACrediter);
 	}
 	
-	public void supprimerCompte(){
-		
+	public void supprimerCompte(String numeroCompte){
+		CompteDao.deleteAccountByNumber(numeroCompte);		
 	}
 	
 	public Compte consulterCompte(String numeroCompte){
