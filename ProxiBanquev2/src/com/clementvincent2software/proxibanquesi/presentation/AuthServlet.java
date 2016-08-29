@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.clementvincent2software.proxibanquesi.dao.ConseillerDao;
 import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.AuthService;
-
+import com.clementvincent2software.proxibanquesi.service.ConseillerService;
 /**
  * Servlet implementation class AuthServlet
  */
@@ -56,7 +56,8 @@ public class AuthServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 
 		if (resultAuth == true) {
-			Conseiller conseiller = ConseillerDao.readConseillerByLogin(login);
+			ConseillerService conseillerService = new ConseillerService();
+			Conseiller conseiller = conseillerService.lireConseiller(login);
 			HttpSession maSession = request.getSession();
 			maSession.setAttribute("conseiller", conseiller);
 

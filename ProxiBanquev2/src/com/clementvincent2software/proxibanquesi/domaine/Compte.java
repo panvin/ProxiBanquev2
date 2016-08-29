@@ -9,7 +9,7 @@ public abstract class Compte {
 
 	private String numero;
 	private Float solde;
-	private Date dateOuverture;
+	private String dateOuverture;
 	
 	/**
 	 * Constructeur de la classe Compte
@@ -17,7 +17,7 @@ public abstract class Compte {
 	 * @param solde
 	 * @param dateOuverture
 	 */
-	public Compte(String numero, Float solde, Date dateOuverture) {
+	public Compte(String numero, Float solde, String dateOuverture) {
 		super();
 		this.numero = numero;
 		this.solde = solde;
@@ -60,7 +60,7 @@ public abstract class Compte {
 	 * Méthode permettant d'obtenir la date d'ouverture du compte
 	 * @return
 	 */
-	public Date getDateOuverture() {
+	public String getDateOuverture() {
 		return dateOuverture;
 	}
 
@@ -68,7 +68,7 @@ public abstract class Compte {
 	 * Méthode permettant de modifier la date d'ouverture du compte
 	 * @param dateOuverture
 	 */
-	public void setDateOuverture(Date dateOuverture) {
+	public void setDateOuverture(String dateOuverture) {
 		this.dateOuverture = dateOuverture;
 	}
 	

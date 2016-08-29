@@ -56,57 +56,6 @@ public class ConseillerDao {
 	}
 
 	/**
-	 * Méthode permettant de récupérer les informations en base de tout les conseiller de proxibanque
-	 * @return collection de Conseiller
-	 */
-	public static Collection<Conseiller> readAllConseiller() {
-		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
-		String login = "root";
-		String passwd = "";
-		Connection cn = null;
-		Statement st = null;
-		ResultSet rs = null;
-		Collection<Conseiller> collection = new ArrayList<Conseiller>();
-		String nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller, passwordConseiller;
-	
-		try {
-			// Etape 1: chargement du driver
-			Class.forName("com.mysql.jdbc.Driver");
-			// Etape 2 : recuperation de la connexion
-			cn = DriverManager.getConnection(url, login, passwd);
-			// Etape 3 : Creation d'un statement
-			st = cn.createStatement();
-			String sql = "SELECT * FROM conseiller";
-			// Etape 4: Execution requête
-			rs = st.executeQuery(sql);
-			// Etape 5 : Parcours de resultset
-			while (rs.next()) {
-				nomConseiller = rs.getString("nom");
-				prenomConseiller = rs.getString("prenom");
-				civiliteConseiller = rs.getString("civilite");
-				loginConseiller = rs.getString("login");
-				passwordConseiller = rs.getString("password");
-				collection.add(new Conseiller(nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller, passwordConseiller));
-			}
-	
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				// Etape 6 : liberer ressources de la memoire.
-				cn.close();
-				st.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return collection;
-	}
-
-	/**
 	 * Méthode permettant de récupérer les informations en base d'un conseiller à partir de son login
 	 * @param loginInit Login du conseiller
 	 * @return conseiller
@@ -164,7 +113,7 @@ public class ConseillerDao {
 	 * @param loginInit  Login du conseiller
 	 * @param newConseiller Objet Conseiller contenant les nouvelles informations
 	 */
-	public static void updateConseillerById(String loginInit, Conseiller newConseiller){
+	public static void updateConseillerByLogin(String loginInit, Conseiller newConseiller){
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/formation";
 		String login = "root";
@@ -202,7 +151,7 @@ public class ConseillerDao {
 	 * Méthode permettant de supprimer en base un conseiller à partir de son login
 	 * @param loginInit Login du conseiller
 	 */
-	public static void deleteConseillerById(String loginInit){
+	public static void deleteConseillerByLogin(String loginInit){
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/formation";
 		String login = "root";

@@ -16,7 +16,7 @@ public class CompteCourant extends Compte {
 	 * @param dateOuverture
 	 * @param titulaire
 	 */
-	public CompteCourant(String numero, Float solde, Date dateOuverture, Client titulaire) {
+	public CompteCourant(String numero, Float solde, String dateOuverture, Client titulaire) {
 		super(numero, solde, dateOuverture);
 		this.titulaire = titulaire;
 	}
@@ -27,7 +27,7 @@ public class CompteCourant extends Compte {
 	 * @param solde
 	 * @param dateOuverture
 	 */
-	public CompteCourant(String numero, Float solde, Date dateOuverture) {
+	public CompteCourant(String numero, Float solde, String dateOuverture) {
 		super(numero, solde, dateOuverture);
 		// TODO Auto-generated constructor stub
 	}
