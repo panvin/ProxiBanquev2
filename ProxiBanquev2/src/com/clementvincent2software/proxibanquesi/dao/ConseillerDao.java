@@ -97,7 +97,7 @@ public class ConseillerDao {
 		return collection;
 	}
 
-	public static Conseiller readConseillerByLogin() {
+	public static Conseiller readConseillerByLogin(String loginInit) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/formation";
 		String login = "root";
@@ -116,7 +116,7 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "SELECT * FROM conseiller WHERE login=";
+			String sql = "SELECT * FROM conseiller WHERE login='"+loginInit+"';";
 			// Etape 4: Execution requête
 			rs = st.executeQuery(sql);
 			// Etape 5 : Parcours de resultset
@@ -144,4 +144,5 @@ public class ConseillerDao {
 		}
 		return conseiller;
 	}
+
 }
