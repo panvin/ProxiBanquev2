@@ -20,7 +20,7 @@ public class CompteDao {
 	 * @param typeCompte Type du compte Courant/Epargne
 	 * @param idClient identifiant du client titulaire du futur compte
 	 */
-	public void createAccount(Compte compte, String typeCompte, int idClient) {
+	public void createCompte(Compte compte, String typeCompte, int idClient) {
 		// INfomration d'accès à la base de données
 				String url = "jdbc:mysql://localhost/ProxiBanque";
 				String login = "root";
@@ -60,7 +60,7 @@ public class CompteDao {
 	 * @param numCompte
 	 * @param newSolde
 	 */
-	public void updateAccountByNum(String numCompte, float newSolde) {
+	public void updateCompteByNum(String numCompte, float newSolde) {
 		// INformation d'acces à la base de donnees
 				String url = "jdbc:mysql://localhost/formation";
 				String login = "root";
@@ -97,7 +97,7 @@ public class CompteDao {
 	 * Méthode permettant de supprimer en base un compte  à partir de son numéro
 	 * @param numCompte numéro du compte à supprimer
 	 */
-	public void deleteAccountByNUm(String numCompte) {
+	public void deleteCompteByNUm(String numCompte) {
 		// INformation d'acces à la base de donnees
 				String url = "jdbc:mysql://localhost/formation";
 				String login = "root";
