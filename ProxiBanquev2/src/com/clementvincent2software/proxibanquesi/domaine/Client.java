@@ -12,23 +12,46 @@ public class Client extends Personne {
 	private CompteCourant compteCourant;
 	
 	
+
 	/**
 	 * Constructeur de la classe Client
 	 * @param nom
 	 * @param prenom
 	 * @param civilite
 	 * @param email
-	 * @param coordonnees
+	 * @param adresse
+	 * @param ville
+	 * @param telephone
+	 * @param cp
 	 * @param compteEpargne
 	 * @param compteCourant
 	 */
-	public Client(String nom, String prenom, String civilite, String email, Coordonnees coordonnees,
+	public Client(String nom, String prenom, String civilite, String email, String adresse, String ville, String telephone, String cp, 
 			CompteEpargne compteEpargne, CompteCourant compteCourant) {
 		super(nom, prenom, civilite);
 		this.email = email;
-		this.coordonnees = coordonnees;
+		this.coordonnees =  new Coordonnees(adresse, ville, telephone, cp);
 		this.compteEpargne = compteEpargne;
 		this.compteCourant = compteCourant;
+	}
+	
+	/**
+	 * Constructeur de la classe Client avec compte epargne et courant null
+	 * @param nom
+	 * @param prenom
+	 * @param civilite
+	 * @param email
+	 * @param adresse
+	 * @param ville
+	 * @param telephone
+	 * @param cp
+	 */
+	public Client(String nom, String prenom, String civilite, String email, String adresse, String ville, String telephone, String cp) {
+		super(nom, prenom, civilite);
+		this.email = email;
+		this.coordonnees =  new Coordonnees(adresse, ville, telephone, cp);
+		this.compteEpargne = null;
+		this.compteCourant = null;
 	}
 
 	/**

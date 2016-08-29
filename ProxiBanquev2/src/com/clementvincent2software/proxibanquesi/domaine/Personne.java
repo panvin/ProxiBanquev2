@@ -4,7 +4,7 @@ package com.clementvincent2software.proxibanquesi.domaine;
  * Classe Personne, représente les personnes qui interviennent dans le SI
  * @author Clement CASTRO et Vincent PANOUILLERES
  */
-public class Personne {
+public abstract class Personne {
 
 	private String nom;
 	private String prenom;
