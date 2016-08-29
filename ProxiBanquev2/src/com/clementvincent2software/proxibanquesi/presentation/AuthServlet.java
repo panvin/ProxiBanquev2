@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.clementvincent2software.proxibanquesi.dao.ConseillerDao;
 import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.AuthService;
 import com.clementvincent2software.proxibanquesi.service.ConseillerService;
