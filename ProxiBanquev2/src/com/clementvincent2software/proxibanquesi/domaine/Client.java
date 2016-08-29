@@ -170,7 +170,4 @@ public class Client extends Personne {
 	public void setMonConseiller(Conseiller monConseiller) {
 		this.monConseiller = monConseiller;
 	}
-	
-	
-	
 }

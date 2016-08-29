@@ -1,7 +1,5 @@
 package com.clementvincent2software.proxibanquesi.service.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -59,5 +57,4 @@ public class AuthServiceTest {
 		
 		Assert.assertFalse(status);		
 	}
-
 }

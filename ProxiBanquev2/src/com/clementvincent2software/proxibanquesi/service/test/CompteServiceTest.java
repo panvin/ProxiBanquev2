@@ -10,8 +10,6 @@ import com.clementvincent2software.proxibanquesi.domaine.Client;
 import com.clementvincent2software.proxibanquesi.domaine.Compte;
 import com.clementvincent2software.proxibanquesi.domaine.CompteCourant;
 import com.clementvincent2software.proxibanquesi.domaine.CompteEpargne;
-import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
-import com.clementvincent2software.proxibanquesi.service.ClientService;
 import com.clementvincent2software.proxibanquesi.service.CompteService;
 
 /**

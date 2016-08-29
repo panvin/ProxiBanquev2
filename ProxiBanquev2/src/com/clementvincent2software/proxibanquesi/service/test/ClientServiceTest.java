@@ -1,7 +1,5 @@
 package com.clementvincent2software.proxibanquesi.service.test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -14,13 +12,15 @@ import com.clementvincent2software.proxibanquesi.service.ClientService;
 
 public class ClientServiceTest {
 	
-	Client client1;
+	Client clientTest;
+	Conseiller conseillerTest;
 	ClientService clientService;
 	
 	@Before
 	public void avantChaqueTest(){
 		
-		client1 = new Client("Dupond", "Francois", "Mr", "duponf@proxibanque.com", "120 rue massena", "Lyon", "0102030405", "69003", 1, new Conseiller("Dupond", "Jean", "Mr", "jdupond", "1234"));
+		conseillerTest = new Conseiller("responsable", "antoine", "monsieur", "login", "password");
+		clientTest = new Client("dupond", "toto", "monsieur", "asez@fr.com", "120 rue factice", "Lyon", "0102030405", "69003", 1, conseillerTest, null, null);
 		clientService = new ClientService();
 	}
 
@@ -28,7 +28,7 @@ public class ClientServiceTest {
 	public void testCreerClient() {
 		
 		boolean status;
-		status = clientService.creerClient(client1);
+		status = clientService.creerClient(clientTest);
 		Assert.assertTrue(status);
 	}
 	
@@ -37,7 +37,7 @@ public class ClientServiceTest {
 		
 		Client testClient;
 		testClient = clientService.lireClient(1);
-		Assert.assertEquals(testClient, client1);
+		Assert.assertEquals(testClient, clientTest);
 	}
 	
 	@Test
@@ -53,21 +53,21 @@ public class ClientServiceTest {
 	public void testModificationClient() {
 		
 		boolean status; 
-		status = clientService.modificationClient(2, client1);
+		status = clientService.modifierClient(2, clientTest);
 		Assert.assertTrue(status);
 	}
 	
 	@Test
 	public void testModificationClient2() {
 		
-		clientService.modificationClient(2, client1);
-		Assert.assertEquals( clientService.lireClient(2), client1);
+		clientService.modifierClient(2, clientTest);
+		Assert.assertEquals( clientService.lireClient(2), clientTest);
 	}
 
 	@Test
 	public void testSuppressionClient() {
 		
-		boolean status = clientService.suppressionClient(client1.getId());
+		boolean status = clientService.suppressionClient(clientTest.getId());
 		Assert.assertTrue(status);
 		
 	}

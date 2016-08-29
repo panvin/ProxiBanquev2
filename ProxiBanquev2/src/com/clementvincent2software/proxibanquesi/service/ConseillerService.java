@@ -1,7 +1,5 @@
 package com.clementvincent2software.proxibanquesi.service;
 
-import java.util.ArrayList;
-
 import com.clementvincent2software.proxibanquesi.dao.ConseillerDao;
 import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 

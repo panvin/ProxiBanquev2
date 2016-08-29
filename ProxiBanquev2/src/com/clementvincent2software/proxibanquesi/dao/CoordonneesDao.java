@@ -5,26 +5,24 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 
-/**
- * Classe ConseillerDao, permet la gestion des Conseillers en base
- * @author Clement CASTRO et Vincent PANOUILLERES
- *
- */
-public class ConseillerDao {
-	
+import com.clementvincent2software.proxibanquesi.domaine.Coordonnees;
+
+public class CoordonneesDao {
+
 	/**
-	 * Méthode permettant la création en base d'un nouveau conseiller en base
-	 * @param conseiller
+	 * Méthode permettant la création en base de coordoonnees pour un client.
+	 * @param coordonnees Passe en parametres l'objet coordonnees.
+	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs, retourne false sinon
 	 */
-	public static void createConseiller(Conseiller conseiller) {
+	public static boolean createCoordonnees(Coordonnees coordonnees, int clientId) {
 		// INfomration d'accès à la base de données
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
 		Statement st = null;
+		boolean status = true;
 
 		try {
 			// Etape 1: chargement du driver
@@ -33,13 +31,17 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "INSERT INTO Conseiller(nom, prenom, civilite, login, password) VALUES ('" + conseiller.getNom() + "','" + conseiller.getPrenom() + "','" + conseiller.getCivilite() + "','" + conseiller.getLogin() + "','" + conseiller.getPassword() + "');";
+			String sql = "INSERT INTO Coordonnees(adresse, ville, telephone, cp, idClient) VALUES ('"
+					+ coordonnees.getAdresse() + "','" + coordonnees.getVille() + "','" + coordonnees.getTelephone()
+					+ "','" + coordonnees.getCp() + "','" + clientId + "');";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 
 		} catch (SQLException e) {
+			status =false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			status = false;
 			e.printStackTrace();
 		} finally {
 			try {
@@ -48,17 +50,21 @@ public class ConseillerDao {
 				st.close();
 
 			} catch (SQLException e) {
+				status = false;
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
+	
 	/**
-	 * Méthode permettant de récupérer les informations en base d'un conseiller à partir de son login
-	 * @param loginInit Login du conseiller
-	 * @return conseiller
+	 * Méthode permettant de récupérer les coordonnees d'un client en base à partir de l'identifiant client.
+	 * 
+	 * @param idClient L'identifiant unique du client.
+	 * @return Retourne l'objet coordonnees correspondant à l'id client.
 	 */
-	public static Conseiller readConseillerByLogin(String loginInit) {
+	public static Coordonnees readCoordonneesByIdClient(int idClient) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
@@ -66,10 +72,9 @@ public class ConseillerDao {
 		Connection cn = null;
 		Statement st = null;
 		ResultSet rs = null;
-		Conseiller conseiller = null;
-		String nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller, passwordConseiller;
-		
-	
+		Coordonnees coordonnees = null;
+		String adresseClient, villeClient, telephoneClient, cpClient;
+
 		try {
 			// Etape 1: chargement du driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -77,19 +82,18 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "SELECT * FROM conseiller WHERE login='"+loginInit+"';";
+			String sql = "SELECT * FROM coordonnees WHERE idClient='" + idClient + "';";
 			// Etape 4: Execution requête
 			rs = st.executeQuery(sql);
 			// Etape 5 : Parcours de resultset
 			while (rs.next()) {
-				nomConseiller = rs.getString("nom");
-				prenomConseiller = rs.getString("prenom");
-				civiliteConseiller = rs.getString("civilite");
-				loginConseiller = rs.getString("login");
-				passwordConseiller = rs.getString("password");
-				conseiller = new Conseiller(nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller, passwordConseiller);
+				adresseClient = rs.getString("adresse");
+				villeClient = rs.getString("ville");
+				telephoneClient = rs.getString("telephone");
+				cpClient = rs.getString("cp");
+				coordonnees = new Coordonnees(adresseClient, villeClient, telephoneClient, cpClient);
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -103,21 +107,23 @@ public class ConseillerDao {
 				e.printStackTrace();
 			}
 		}
-		return conseiller;
+		return coordonnees;
 	}
 
 	/**
-	 * Méthode permettant de mettre à jour en base un conseiller à partir de son login
-	 * @param loginInit  Login du conseiller
-	 * @param newConseiller Objet Conseiller contenant les nouvelles informations
+	 * Méthode permettant de mettre à jour en base les coordonnees d'un lcient à partir de son identifiant.
+	 * @param idClient L'identifiant unique du client.
+	 * @param newCoordonnees Les coordonnees client à jour.
+	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs, retourne false sinon.
 	 */
-	public static void updateConseillerByLogin(String loginInit, Conseiller newConseiller){
+	public static boolean updateCoordonneesByClientId(int idClient, Coordonnees newCoordonnees) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
 		Statement st = null;
+		boolean status = true;
 
 		try {
 			// Etape 1: chargement du driver
@@ -126,36 +132,44 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "UPDATE Conseiller SET nom = '" + newConseiller.getNom() + "', prenom = '" + newConseiller.getPrenom() + "', civilite = '" + newConseiller.getCivilite() + "', login = '" + newConseiller.getLogin() + "', password = '" + newConseiller.getPassword() + "' WHERE login='"+loginInit+ "';";
+			String sql = "UPDATE coordonnees SET ville = '" + newCoordonnees.getVille() + "', telephone = '"
+					+ newCoordonnees.getTelephone() + "', cp = '" + newCoordonnees.getCp() + "', adresse = '"
+					+ newCoordonnees.getAdresse() + "' WHERE idClient='" + idClient + "';";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
+			status = false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			status = false;
 			e.printStackTrace();
 		} finally {
 			try {
 				// Etape 6 : liberer ressources de la memoire.
 				cn.close();
 				st.close();
+
 			} catch (SQLException e) {
+				status = false;
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
-
 	/**
-	 * Méthode permettant de supprimer en base un conseiller à partir de son login
-	 * @param loginInit Login du conseiller
+	 * Méthode permettant de supprimer en base les coordonnes d'un client à partir de son identifiant unique
+	 * @param idClient L'identifiant unique du client dont on souhaite supprimer les coordonnees
+	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs, retourne false sinon
 	 */
-	public static void deleteConseillerByLogin(String loginInit){
+	public static boolean deleteCoordonneesByClientId(int idClient) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
 		Statement st = null;
+		boolean status = true;
 
 		try {
 			// Etape 1: chargement du driver
@@ -164,12 +178,14 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "DELETE FROM Conseiller WHERE login ="+loginInit+";";
+			String sql = "DELETE FROM coordonnees WHERE idClient =" + idClient + ";";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
+			status = false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			status = false;
 			e.printStackTrace();
 		} finally {
 			try {
@@ -177,9 +193,10 @@ public class ConseillerDao {
 				cn.close();
 				st.close();
 			} catch (SQLException e) {
+				status = false;
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
-
 }
