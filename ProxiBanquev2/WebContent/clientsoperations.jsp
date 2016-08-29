@@ -17,7 +17,7 @@
 	<!-- Banner -->
 	<div id="banner">
 		<h2>Application ProxiBanque V2</h2>
-		<p>Bienvenue <c:out value="${login}"/> sur l'application ProxiBanque V2</p>
+		<p>Bienvenue <c:out value="${nom}"/> sur l'application ProxiBanque V2</p>
 		<p>Choisissez un client parmis votre liste</p>
 		<p>puis sélectionnez une opération à effectuer</p>
 	</div>
