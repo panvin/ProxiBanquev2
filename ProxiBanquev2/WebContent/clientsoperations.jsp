@@ -14,12 +14,42 @@
 </head>
 <body>
 
+	<nav class="navbar navbar-inverse navbar-static-top">
+  		<div class="container-fluid">
+			<ul class="nav navbar-left">
+			  <li role="presentation"><a href="clientsoperations.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil ProxiBanque</a></li>
+			</ul>
+			<ul class="nav navbar-right">
+			  <li role="presentation"><a href="index.html"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>  Deconnexion</a></li>
+			</ul>
+		</div>
+	</nav>
 	<!-- Banner -->
 	<div id="banner">
 		<h2>Application ProxiBanque V2</h2>
-		<p>Bienvenue <c:out value="${nom}"/> sur l'application ProxiBanque V2</p>
-		<p>Choisissez un client parmis votre liste</p>
-		<p>puis sélectionnez une opération à effectuer</p>
+		<p>Bienvenue <c:out value="${conseiller.nom}"/> sur l'application ProxiBanque V2</p>
+		<br>
+		<div class="form-group container">
+    		<label for="exampleSelect1">Choisissez un client parmis votre liste</label>
+   				<select class="form-control" id="exampleSelect1">
+			      <option>1</option>
+			      <option>2</option>
+			      <option>3</option>
+			      <option>4</option>
+			      <option>5</option>
+			    </select>
+ 		</div>
+ 		<br>
+		<div class="form-group container">
+    		<label for="exampleSelect1">Sélectionner une opération</label>
+   				<select class="form-control" id="exampleSelect1">
+			      <option>1</option>
+			      <option>2</option>
+			      <option>3</option>
+			      <option>4</option>
+			      <option>5</option>
+			    </select>
+ 		</div>
 	</div>
 
 	<!-- Section 1  -->

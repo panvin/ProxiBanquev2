@@ -66,3 +66,16 @@
 	width: 40%;
 	margin: 0 30% 0 30%;
 }
+
+.container-fluid {
+	padding: 0 4% 0 0;
+}
+
+.container{
+	margin: 0 30% 0 30%;
+	width: 40%;
+}
+
+.navbar {
+	margin-bottom: -1.7px;
+}
