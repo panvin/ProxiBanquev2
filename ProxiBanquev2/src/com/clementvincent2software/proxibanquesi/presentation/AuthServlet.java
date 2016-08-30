@@ -1,6 +1,7 @@
 package com.clementvincent2software.proxibanquesi.presentation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.clementvincent2software.proxibanquesi.domaine.Client;
 import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.AuthService;
+import com.clementvincent2software.proxibanquesi.service.ClientService;
 import com.clementvincent2software.proxibanquesi.service.ConseillerService;
 /**
  * Servlet implementation class AuthServlet
@@ -56,9 +60,12 @@ public class AuthServlet extends HttpServlet {
 
 		if (resultAuth == true) {
 			ConseillerService conseillerService = new ConseillerService();
+			ClientService clientService = new ClientService();
 			Conseiller conseiller = conseillerService.lireConseiller(login);
+			ArrayList<Client> listeClient = clientService.lireClientsParConseiller(login);
 			HttpSession maSession = request.getSession();
 			maSession.setAttribute("conseiller", conseiller);
+			maSession.setAttribute("listeClient", listeClient);
 
 			dispatcher = request.getRequestDispatcher("clientsoperations.jsp");
 		} else {

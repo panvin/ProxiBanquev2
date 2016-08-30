@@ -79,3 +79,12 @@
 .navbar {
 	margin-bottom: -1.7px;
 }
+
+.panel {
+	margin: 0 10% 0 10%;
+	width: 80%;
+}
+
+.table {
+	color: #000000;
+}

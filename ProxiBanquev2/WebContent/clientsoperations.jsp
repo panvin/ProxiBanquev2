@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -29,17 +29,33 @@
 		<h2>Application ProxiBanque V2</h2>
 		<p>Bienvenue <c:out value="${conseiller.nom}"/> sur l'application ProxiBanque V2</p>
 		<br>
-		<div class="form-group container">
-    		<label for="exampleSelect1">Choisissez un client parmis votre liste</label>
-   				<select class="form-control" id="exampleSelect1">
-			      <option>1</option>
-			      <option>2</option>
-			      <option>3</option>
-			      <option>4</option>
-			      <option>5</option>
-			    </select>
- 		</div>
- 		<br>
+	
+	<!-- Liste des clients du conseiller -->
+ 	<div class="panel panel-default">
+ 		<div class="panel-heading">Liste des clients pour le conseiller : <c:out value="${conseiller.nom}"/></div>
+ 		<table class="table">
+		  <thead>
+		    <tr>
+		      <th>ID</th>
+		      <th>Civilité</th>
+		      <th>Nom</th>
+		      <th>Prenom</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		 	<c:forEach var="Client" items="${listeClient}">
+				<tr>
+					<th scope="row"><c:out value="${Client.id}"/></th>
+		     	 	<td><c:out value="${Client.civilite}"/></td>
+		      		<td><c:out value="${Client.nom}"/></td>
+		      		<td><c:out value="${Client.prenom}"/></td>
+				</tr>
+			</c:forEach>
+		  </tbody>
+		</table>
+	</div>
+	</div>
+
 		<div class="form-group container">
     		<label for="exampleSelect1">Sélectionner une opération</label>
    				<select class="form-control" id="exampleSelect1">
@@ -50,7 +66,7 @@
 			      <option>5</option>
 			    </select>
  		</div>
-	</div>
+
 
 	<!-- Section 1  -->
 	<div id="one" class="container-fluid">
