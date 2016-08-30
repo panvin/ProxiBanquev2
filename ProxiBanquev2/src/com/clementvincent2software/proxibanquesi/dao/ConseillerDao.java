@@ -17,14 +17,16 @@ public class ConseillerDao {
 	/**
 	 * Méthode permettant la création en base d'un nouveau conseiller en base
 	 * @param conseiller
+	 * @return Retourne true si la methode se deroule correctement, retourne false sinon
 	 */
-	public static void createConseiller(Conseiller conseiller) {
+	public static boolean createConseiller(Conseiller conseiller) {
 		// INfomration d'accès à la base de données
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
 		Statement st = null;
+		boolean status = true;
 
 		try {
 			// Etape 1: chargement du driver
@@ -38,8 +40,10 @@ public class ConseillerDao {
 			st.executeUpdate(sql);
 
 		} catch (SQLException e) {
+			status = false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			status = false;
 			e.printStackTrace();
 		} finally {
 			try {
@@ -48,9 +52,11 @@ public class ConseillerDao {
 				st.close();
 
 			} catch (SQLException e) {
+				status = false;
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
 	/**
@@ -77,7 +83,7 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "SELECT * FROM conseiller WHERE login='"+loginInit+"';";
+			String sql = "SELECT * FROM conseiller WHERE login='"+ loginInit +"';";
 			// Etape 4: Execution requête
 			rs = st.executeQuery(sql);
 			// Etape 5 : Parcours de resultset
@@ -110,14 +116,16 @@ public class ConseillerDao {
 	 * Méthode permettant de mettre à jour en base un conseiller à partir de son login
 	 * @param loginInit  Login du conseiller
 	 * @param newConseiller Objet Conseiller contenant les nouvelles informations
+	 * @return Retourne true si la methode se deroule correctement, retourne false sinon
 	 */
-	public static void updateConseillerByLogin(String loginInit, Conseiller newConseiller){
+	public static boolean updateConseillerByLogin(String loginInit, Conseiller newConseiller){
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
 		Statement st = null;
+		boolean status = true;
 
 		try {
 			// Etape 1: chargement du driver
@@ -130,8 +138,10 @@ public class ConseillerDao {
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
+			status = false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			status = false;
 			e.printStackTrace();
 		} finally {
 			try {
@@ -139,23 +149,27 @@ public class ConseillerDao {
 				cn.close();
 				st.close();
 			} catch (SQLException e) {
+				status = false;
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
 
 	/**
 	 * Méthode permettant de supprimer en base un conseiller à partir de son login
 	 * @param loginInit Login du conseiller
+	 * @return Retourne true si la methode se deroule correctement, retourne false sinon 
 	 */
-	public static void deleteConseillerByLogin(String loginInit){
+	public static boolean deleteConseillerByLogin(String loginInit){
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
 		Statement st = null;
+		boolean status = true;
 
 		try {
 			// Etape 1: chargement du driver
@@ -168,8 +182,10 @@ public class ConseillerDao {
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
+			status = false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			status = false;
 			e.printStackTrace();
 		} finally {
 			try {
@@ -177,9 +193,11 @@ public class ConseillerDao {
 				cn.close();
 				st.close();
 			} catch (SQLException e) {
+				status = false;
 				e.printStackTrace();
 			}
 		}
+		return status;
 	}
 
 }

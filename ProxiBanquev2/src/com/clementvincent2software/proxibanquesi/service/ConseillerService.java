@@ -6,19 +6,21 @@ import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 public class ConseillerService {
 	
 	public boolean creerConseiller (Conseiller conseiller){
-		ConseillerDao.createConseiller(conseiller);
-		return true;
+		boolean status;
+		status = ConseillerDao.createConseiller(conseiller);
+		return status;
 
 	}
 	
 	public boolean modifierConseiller(String login, Conseiller conseiller){
-		ConseillerDao.updateConseillerByLogin(login, conseiller);
-		return true;
+		boolean status = ConseillerDao.updateConseillerByLogin(login, conseiller);
+		return status;
 	}
 	
 	public boolean supprimerConseiller(String login){
-		ConseillerDao.deleteConseillerByLogin(login);
-		return false;	
+		boolean status;
+		status = ConseillerDao.deleteConseillerByLogin(login);
+		return status;	
 	}
 	
 	public Conseiller lireConseiller(String login){
