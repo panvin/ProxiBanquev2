@@ -79,7 +79,7 @@ public class ClientDao {
 		Statement st = null;
 		ResultSet rs = null;
 		Collection<Client> collection = new ArrayList<Client>();
-		String nomClient, prenomClient, civiliteClient;
+		String nomClient, prenomClient, civiliteClient, email;
 		int idClient;
 
 		try {
@@ -98,7 +98,8 @@ public class ClientDao {
 				prenomClient = rs.getString("prenom");
 				civiliteClient = rs.getString("civilite");
 				idClient = rs.getInt("id");
-				collection.add(new Client(nomClient, prenomClient, civiliteClient, idClient));
+				email= rs.getString("email");
+				collection.add(new Client(nomClient, prenomClient, civiliteClient, email, idClient));
 			}
 
 		} catch (SQLException e) {
@@ -134,7 +135,7 @@ public class ClientDao {
 		Statement st = null;
 		ResultSet rs = null;
 		Collection<Client> collection = new ArrayList<Client>();
-		String nomClient, prenomClient, civiliteClient;
+		String nomClient, prenomClient, civiliteClient, email;
 		int idClient;
 
 		try {
@@ -153,7 +154,8 @@ public class ClientDao {
 				prenomClient = rs.getString("prenom");
 				civiliteClient = rs.getString("civilite");
 				idClient = rs.getInt("id");
-				collection.add(new Client(nomClient, prenomClient, civiliteClient, idClient));
+				email = rs.getString("email");
+				collection.add(new Client(nomClient, prenomClient, civiliteClient, email, idClient));
 			}
 
 		} catch (SQLException e) {
@@ -189,7 +191,7 @@ public class ClientDao {
 		Statement st = null;
 		ResultSet rs = null;
 		Client client = null;
-		String nomClient, prenomClient, civiliteClient;
+		String nomClient, prenomClient, civiliteClient, email;
 		int idClient;
 
 		try {
@@ -208,7 +210,8 @@ public class ClientDao {
 				prenomClient = rs.getString("prenom");
 				civiliteClient = rs.getString("civilite");
 				idClient = rs.getInt("id");
-				client = new Client(nomClient, prenomClient, civiliteClient, idClient);
+				email = rs.getString("email");
+				client = new Client(nomClient, prenomClient, civiliteClient, email, idClient);
 			}
 
 		} catch (SQLException e) {

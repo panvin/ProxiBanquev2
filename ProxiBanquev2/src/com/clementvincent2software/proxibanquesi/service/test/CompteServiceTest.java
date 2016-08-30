@@ -30,8 +30,8 @@ public class CompteServiceTest {
 		compteEpargne = new CompteEpargne("01234", (float)152000, "15/02/2016");
 		compteCourant = new CompteCourant("012345", (float)152000, "15/02/2016");
 		compteCourant2 = new CompteCourant("012346", (float)152000, "15/02/2016");
-		client = new Client("dupond", "toto", "monsieur", 2);
-		client2 = new Client("test", "test", "madame", 4);
+		client = new Client("dupond", "toto", "monsieur", "test@test.com", 2);
+		client2 = new Client("test", "test", "madame", "test@test.com", 4);
 		compteService.ajouterCompte( client, "Courant", "1357", (float) 12000, "15/02/2016");
 		compteService.ajouterCompte( client, "Epargne", "2468", (float) 15000, "15/02/2016");
 	}

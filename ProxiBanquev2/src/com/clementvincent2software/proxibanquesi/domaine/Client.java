@@ -70,9 +70,10 @@ public class Client extends Personne {
 	 * @param prenom
 	 * @param civilite
 	 */
-	public Client(String nom, String prenom, String civilite, int idClient) {
+	public Client(String nom, String prenom, String civilite, String emailClient,  int idClient) {
 		super(nom, prenom, civilite);
 		this.id = idClient;
+		this.email= emailClient;
 	}
 
 	/**
