@@ -1,5 +1,7 @@
 package com.clementvincent2software.proxibanquesi.service;
 
+import java.util.ArrayList;
+
 import com.clementvincent2software.proxibanquesi.dao.ClientDao;
 import com.clementvincent2software.proxibanquesi.dao.CompteDao;
 import com.clementvincent2software.proxibanquesi.domaine.Client;
@@ -108,6 +110,15 @@ public class CompteService {
 		Compte compteDemande = CompteDao.readCompteByNum(numeroCompte);
 		return compteDemande;
 	}
+	
+	/**
+	 * Cette méthode permet de retourner l'ensemble des comptes clients sous forme de liste
+	 * @return Retourne une ArrayList contenant l'ensemble des comptes clients.
+	 */
+	public ArrayList<Compte> consulterTousLesCompte() {
+		ArrayList<Compte> listeCompteDemande = CompteDao.readAllCompte();
+		return listeCompteDemande;
+	}	
 
 	/**
 	 * Cette methode permet de mettre à jour les donnes du compte en banque à
