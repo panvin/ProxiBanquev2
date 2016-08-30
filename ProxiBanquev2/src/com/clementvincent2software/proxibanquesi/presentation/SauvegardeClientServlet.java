@@ -1,6 +1,7 @@
 package com.clementvincent2software.proxibanquesi.presentation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.clementvincent2software.proxibanquesi.domaine.Client;
+import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.domaine.Coordonnees;
 import com.clementvincent2software.proxibanquesi.service.ClientService;
 
@@ -78,14 +80,15 @@ public class SauvegardeClientServlet extends HttpServlet {
 		clientAModifier.setPrenom(prenom);
 		clientAModifier.setEmail(email);
 		clientAModifier.setCoordonnees(nouvCoordonnes);
-		
+		Conseiller conseiller = (Conseiller) maSession.getAttribute("conseiller");
 		Boolean resultUpdate = clientService.modifierClient(idClient, clientAModifier);
-		
+		ArrayList<Client> listeClient = clientService.lireClientsParConseiller(conseiller.getLogin());
 		// Etape 3 : Réponse à l'utilisateur
 		RequestDispatcher dispatcher;
 		if (resultUpdate == true) {
 			maSession.setAttribute("resultUpdate", resultUpdate);
 			maSession.setAttribute("resultVirement", false);
+			maSession.setAttribute("listeClient", listeClient);
 			
 			dispatcher = request.getRequestDispatcher("clientsoperations.jsp");
 		} else {
