@@ -29,72 +29,35 @@
 		<h2>Application ProxiBanque V2</h2>
 		<p>Bienvenue <c:out value="${conseiller.nom}"/> sur l'application ProxiBanque V2</p>
 		<br>
-	
-	<!-- Liste des clients du conseiller -->
- 	<div class="panel panel-default">
- 		<div class="panel-heading">Liste des clients pour le conseiller : <c:out value="${conseiller.nom}"/></div>
- 		<table class="table">
-		  <thead>
-		    <tr>
-		      <th>ID</th>
-		      <th>Civilité</th>
-		      <th>Nom</th>
-		      <th>Prenom</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		 	<c:forEach var="Client" items="${listeClient}">
-				<tr>
-					<th scope="row"><c:out value="${Client.id}"/></th>
-		     	 	<td><c:out value="${Client.civilite}"/></td>
-		      		<td><c:out value="${Client.nom}"/></td>
-		      		<td><c:out value="${Client.prenom}"/></td>
-				</tr>
-			</c:forEach>
-		  </tbody>
-		</table>
+
+	<div class="row">
+	<section class="feature 6u 12u$(small)">	
+	<form action="editionClientServlet" method="Post">
+		<label for="nomClient">Nom    </label>
+			<input type="text" id="nomClient" name="nomClient" placeholder="Votre nom"><br>
+		<label for="prenomClient">Prenom </label>
+			<input type="text" id="prenomClient" name="prenomClient" placeholder="votre prénom"><br>
+		<label for="emailClient">Email  </label>
+			<input type="text" id="emailClient" name="emailClient" placeholder="votre mot de passe"><br>
+		<label for="adresseClientl">adresse  </label>
+			<input type="text" id="adresseClientl" name="adresseClientl" placeholder="exemple@gmail.com"><br>
+		<label for="villeClient">ville  </label>
+			<input type="text" id="villeClient" name="villeClient" placeholder="votre mot de passe"><br>
+		<label for="cpClient">code postal  </label>
+			<input type="text" id="cpClient" name="cpClient" placeholder="votre mot de passe"><br>
+		<label for="telephoneClient">téléphone  </label>
+			<input type="text" id="telephoneClient" name="telephoneClient" placeholder="votre mot de passe"><br>
+			
+			<input id="submit" type="submit"  value="Envoyer"><br>
+		</form>
+	</section>
+	</div>
 	</div>
 
-	<br>
-		<form action="EditClientServlet" method="Post" class="form-inline form-group container">
-   				<label for="idClient">ID Client </label>
-   				<select class="form-control" name="idClient" id="idClient">
-			    	<c:forEach var="Client" items="${listeClient}">
-							<option><c:out value="${Client.id}"/></option>
-					</c:forEach>
-			    </select>
-				<button type="submit" class="btn btn-success"> Editer profil Client  </button>
- 		</form>
- 		
- 		<br>
-		<form action="ConsultCompteServlet" method="Post" class="form-inline form-group container">
-   				<label for="idClient2">ID Client </label>
-   				<select class="form-control" name="idClient" id="idClient2">
-			    	<c:forEach var="Client" items="${listeClient}">
-							<option><c:out value="${Client.id}"/></option>
-					</c:forEach>
-			    </select>
-				<button type="submit" class="btn btn-success">Consulter Compte</button>
- 		</form>
- 		
- 		<br>
-		<form action="VirementServlet" method="Post" class="form-inline form-group container">
-   				<label for="idClient3">ID Client </label>
-   				<select class="form-control" name="idClient" id="idClient3">
-			    	<c:forEach var="Client" items="${listeClient}">
-							<option><c:out value="${Client.id}"/></option>
-					</c:forEach>
-			    </select>
-				<button type="submit" class="btn btn-success">Effectuer Virement</button>
- 		</form>
-	</div>
 
 	<!-- Section 1  -->
 	<div id="one" class="container-fluid">
-	
-	
-	
-	
+
 		<div class="center">
 			<h2>Gestion clientèle</h2>
 			<p>L'application ProxiBanque V2 vous offre un outil de gestion

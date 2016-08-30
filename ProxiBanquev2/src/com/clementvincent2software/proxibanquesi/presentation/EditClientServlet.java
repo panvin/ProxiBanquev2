@@ -1,13 +1,15 @@
 package com.clementvincent2software.proxibanquesi.presentation;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.clementvincent2software.proxibanquesi.service.AuthService;
+import javax.servlet.http.HttpSession;
+import com.clementvincent2software.proxibanquesi.domaine.Client;
+import com.clementvincent2software.proxibanquesi.service.ClientService;
 
 /**
  * Servlet implementation class EditClientServlet
@@ -39,12 +41,21 @@ public class EditClientServlet extends HttpServlet {
 	
 	protected void traitement(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Etape 1 : Récupération des paramètres de la requète
-				String idClient = request.getParameter("idClient");
+				int idClient = Integer.parseInt(request.getParameter("idClient"));
 				
 				// Etape 2 : Soumettre les paramètres de la requete à la couche service
-				AuthService authService = new AuthService();
-				Boolean resultAuth;
-				resultAuth = authService.authConseiller(login, pwd);
-	}
+				ClientService clientService = new ClientService();
+				Client lectureClient;
+				lectureClient = clientService.lireClient(idClient);
+				
+				// Etape 3 : Réponse à l'utilisateur
+				RequestDispatcher dispatcher;
 
+					HttpSession maSession = request.getSession();
+					maSession.setAttribute("lectureClient", lectureClient);
+					dispatcher = request.getRequestDispatcher("editclient.jsp");
+					dispatcher.forward(request, response);
+			}
 }
+
+
