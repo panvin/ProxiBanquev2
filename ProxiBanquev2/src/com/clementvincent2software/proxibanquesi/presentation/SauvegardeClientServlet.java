@@ -16,6 +16,7 @@ import com.clementvincent2software.proxibanquesi.service.ClientService;
 
 /**
  * Servlet implementation class SauvegardeClientServlet
+ * Cette servlet permet d'enregistrer dans la abse de données le client modifié sur la page d'edition client.
  */
 @WebServlet("/SauvegardeClientServlet")
 public class SauvegardeClientServlet extends HttpServlet {
@@ -47,6 +48,15 @@ public class SauvegardeClientServlet extends HttpServlet {
 		traitement(request, response);
 	}
 
+	/**
+	 * Cette méthode se charge de l'ensemble des traitements de la servlet pour
+	 * les post et les get
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void traitement(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Etape 1 : Récupération des paramètres de la requète

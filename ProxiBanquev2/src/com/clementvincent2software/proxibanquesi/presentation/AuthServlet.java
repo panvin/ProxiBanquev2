@@ -16,35 +16,53 @@ import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.AuthService;
 import com.clementvincent2software.proxibanquesi.service.ClientService;
 import com.clementvincent2software.proxibanquesi.service.ConseillerService;
+
 /**
- * Servlet implementation class AuthServlet
+ * Servlet implementation class AuthServlet Cette Servlet permet
+ * l'authentification des conseillers
+ * 
+ * @author Clement CASTRO et Vincent PANOUILLERES
  */
 @WebServlet("/AuthServlet")
 public class AuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AuthServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AuthServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		traitement(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		traitement(request, response);
 	}
 
-	protected void traitement(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * Cette méthode se charge de l'ensemble des traitements de la servlet pour
+	 * les post et les get
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void traitement(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Etape 1 : Récupération des paramètres de la requète
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
@@ -53,7 +71,6 @@ public class AuthServlet extends HttpServlet {
 		AuthService authService = new AuthService();
 		Boolean resultAuth;
 		resultAuth = authService.authConseiller(login, pwd);
-		
 
 		// Etape 3 : Réponse à l'utilisateur
 		RequestDispatcher dispatcher;

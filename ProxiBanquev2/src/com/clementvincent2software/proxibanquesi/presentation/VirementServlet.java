@@ -15,34 +15,49 @@ import com.clementvincent2software.proxibanquesi.domaine.Compte;
 import com.clementvincent2software.proxibanquesi.service.CompteService;
 
 /**
- * Servlet implementation class VirementServlet
+ * Servlet implementation class VirementServlet Cette servlet permet de
+ * rediriger 'lutilisateur vers une page ou il pourra effectuer un virement.
  */
 @WebServlet("/VirementServlet")
 public class VirementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public VirementServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public VirementServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		traitement(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		traitement(request, response);
 	}
 
-	protected void traitement(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * Cette méthode se charge de l'ensemble des traitements de la servlet pour
+	 * les post et les get
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void traitement(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		CompteService compteService = new CompteService();
 		ArrayList<Compte> listeCompte = compteService.consulterTousLesCompte();
