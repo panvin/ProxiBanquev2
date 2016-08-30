@@ -44,20 +44,6 @@ public class CompteServiceTest {
 	}
 
 	@Test
-	public void testCreerCompteCourant() {
-		boolean status;
-		status = compteService.creerCompteCourant(client2, "1234567", (float) 12500, "15/02/2016");
-		Assert.assertTrue(status);
-	}
-	
-	@Test
-	public void testCreerCompteEpargne() {
-		boolean status;
-		status = compteService.creerCompteEpargne(client2, "1247893654", (float) 12500, "15 fevrier 2016");
-		Assert.assertTrue(status);
-	}
-
-	@Test
 	public void testVirementCompteACompte() {
 		boolean status;
 		status = compteService.virementCompteACompte("1357", "2468", (float) 140);
@@ -97,7 +83,6 @@ public class CompteServiceTest {
 	@AfterClass
 	public static void apresLesTests(){
 		compteService.supprimerCompteParClient(4);
-		compteService.supprimerCompteParClient(2);
-		
+		compteService.supprimerCompteParClient(2);		
 	}
 }

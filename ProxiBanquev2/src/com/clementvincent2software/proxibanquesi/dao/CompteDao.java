@@ -126,6 +126,66 @@ public class CompteDao {
 		}
 		return compte;
 	}
+	
+	/**
+	 * Cette methode permet de recuperer un compte à partir de son proprietaire et du type de compte.
+	 * @param idClient L'identifiant du client.
+	 * @param Type Le type de compte dont on cherche les informations.
+	 * @return Retourne un objet compte contenant les informations recherchées.
+	 */
+	public static Compte readCompteByClientAndByType(int idClient, String Type) {
+		// INformation d'acces à la base de donnees
+		String url = "jdbc:mysql://localhost/ProxiBanque";
+		String login = "root";
+		String passwd = "";
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		Compte compte = null;
+		String numeroCompte, dateCompte;
+		float soldeCompte;
+
+		try {
+			// Etape 1: chargement du driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Etape 2 : recuperation de la connexion
+			cn = DriverManager.getConnection(url, login, passwd);
+			// Etape 3 : Creation d'un statement
+			st = cn.createStatement();
+			String sql = "SELECT * FROM compte WHERE idClient='" + idClient + "'AND type='"+ Type +"';";
+			// Etape 4: Execution requête
+			rs = st.executeQuery(sql);
+			// Etape 5 : Parcours de resultset
+			while (rs.next()) {
+				numeroCompte = rs.getString("numero");
+				soldeCompte = rs.getFloat("solde");
+				dateCompte = rs.getString("dateouverture");
+				if (Type.equals("epargne")) {
+					compte = new CompteEpargne(numeroCompte, soldeCompte, dateCompte,
+							ClientDao.readClientById(idClient));
+				} else
+					compte = new CompteCourant(numeroCompte, soldeCompte, dateCompte,
+							ClientDao.readClientById(idClient));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				// Etape 6 : liberer ressources de la memoire.
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return compte;
+	}
 
 	/**
 	 * Méthode permettant de modifier en base le solde d'un compte à partir du numéro de compte.

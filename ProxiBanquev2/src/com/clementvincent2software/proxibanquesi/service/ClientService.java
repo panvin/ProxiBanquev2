@@ -3,6 +3,8 @@ package com.clementvincent2software.proxibanquesi.service;
 import java.util.ArrayList;
 
 import com.clementvincent2software.proxibanquesi.domaine.Client;
+import com.clementvincent2software.proxibanquesi.domaine.CompteCourant;
+import com.clementvincent2software.proxibanquesi.domaine.CompteEpargne;
 import com.clementvincent2software.proxibanquesi.domaine.Coordonnees;
 import com.clementvincent2software.proxibanquesi.dao.ClientDao;
 import com.clementvincent2software.proxibanquesi.dao.CompteDao;
@@ -90,9 +92,10 @@ public class ClientService {
 		Client client = ClientDao.readClientById(idClient);
 		Coordonnees coordClient = CoordonneesDao.readCoordonneesByIdClient(idClient);
 		client.setCoordonnees(coordClient);
-		//TODO ajouter les comptes clients
-
-		
+			CompteEpargne compteEpargneClient = (CompteEpargne) CompteDao.readCompteByClientAndByType(idClient, "Epargne");	
+			client.setCompteEpargne(compteEpargneClient);
+			CompteCourant compteCourantClient = (CompteCourant) CompteDao.readCompteByClientAndByType(idClient, "Courant");	
+			client.setCompteCourant(compteCourantClient);
 		return client;
 	}
 

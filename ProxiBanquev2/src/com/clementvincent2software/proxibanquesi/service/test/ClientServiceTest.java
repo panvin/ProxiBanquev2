@@ -36,32 +36,16 @@ public class ClientServiceTest {
 	public void testLireClient() {
 		
 		Client testClient;
-		testClient = clientService.lireClient(1);
-		//Assert.assertThat(testClient, instanceOf(Client.class));
-	}
-	
-	@Test
-	public void testLireClient2() {
-		
-		Client testClient;
-		testClient = clientService.lireClient(1);
+		testClient = clientService.lireClient(4);
 		Assert.assertNotNull(testClient);
 	}
 	
-
 	@Test
 	public void testModificationClient() {
 		
 		boolean status; 
 		status = clientService.modifierClient(2, clientTest);
 		Assert.assertTrue(status);
-	}
-	
-	@Test
-	public void testModificationClient2() {
-		
-		clientService.modifierClient(2, clientTest);
-		Assert.assertEquals( clientService.lireClient(2), clientTest);
 	}
 
 	@Test
