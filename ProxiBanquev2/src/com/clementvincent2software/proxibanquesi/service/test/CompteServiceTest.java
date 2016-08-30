@@ -11,7 +11,7 @@ import com.clementvincent2software.proxibanquesi.domaine.CompteCourant;
 import com.clementvincent2software.proxibanquesi.domaine.CompteEpargne;
 import com.clementvincent2software.proxibanquesi.service.CompteService;
 
- class CompteServiceTest {
+ public class CompteServiceTest {
 
 	private static Compte compteEpargne, compteCourant, compteCourant2;
 	private static CompteService compteService;
@@ -24,8 +24,8 @@ import com.clementvincent2software.proxibanquesi.service.CompteService;
 		compteEpargne = new CompteEpargne("01234", (float)152000, "15/02/2016");
 		compteCourant = new CompteCourant("012345", (float)152000, "15/02/2016");
 		compteCourant2 = new CompteCourant("012346", (float)152000, "15/02/2016");
-		client = new Client("dupond", "toto", "monsieur", "test@test.com", 2);
-		client2 = new Client("test", "test", "madame", "test@test.com", 4);
+		client = new Client("dupond", "toto", "monsieur", "test@test.com", 1500);
+		client2 = new Client("test", "test", "madame", "test@test.com", 1501);
 		compteService.ajouterCompte( client, "Courant", "1357", (float) 12000, "15/02/2016");
 		compteService.ajouterCompte( client, "Epargne", "2468", (float) 15000, "15/02/2016");
 	}
@@ -34,20 +34,6 @@ import com.clementvincent2software.proxibanquesi.service.CompteService;
 	public void testAjouterCompte() {
 		boolean status;
 		status = compteService.ajouterCompte( client2, "Epargne", compteEpargne.getNumero(), compteEpargne.getSolde(), compteEpargne.getDateOuverture());
-		Assert.assertTrue(status);
-	}
-
-	@Test
-	public void testVirementCompteACompte() {
-		boolean status;
-		status = compteService.virementCompteACompte("1357", "2468", (float) 140);
-		Assert.assertTrue(status);
-	}
-	
-	@Test
-	 public void testVirementCompteACompte2() {
-		boolean status;
-		status = compteService.virementCompteACompte("1357", "2468", (float) 140);
 		Assert.assertTrue(status);
 	}
 	
@@ -63,20 +49,13 @@ import com.clementvincent2software.proxibanquesi.service.CompteService;
 	public void testSupprimerCompteParClient(){
 		boolean status;
 		compteService.ajouterCompte( client2, "Courant", compteCourant2.getNumero(), compteCourant2.getSolde(), compteCourant2.getDateOuverture());
-		status = compteService.supprimerCompteParClient(4);
+		status = compteService.supprimerCompteParClient(1501);
 		Assert.assertTrue(status);
-	}
-
-	@Test
-	public void testConsulterCompte() {
-		Compte compteTest;
-		compteTest = compteService.consulterCompte("1357");
-		Assert.assertNotNull(compteTest);
 	}
 	
 	@AfterClass
 	public static void apresLesTests(){
-		compteService.supprimerCompteParClient(4);
-		compteService.supprimerCompteParClient(2);		
+		compteService.supprimerCompteParClient(1501);
+		compteService.supprimerCompteParClient(1500);		
 	}
 }
