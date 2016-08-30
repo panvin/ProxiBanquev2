@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,41 +42,42 @@
 		</p>
 		<br>
 
-		<!-- Liste des clients du conseiller -->
+		<!-- Liste des comptes du client -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Liste des comptes de:
-				<c:out value="${client.civilite}" />
 				<c:out value="${client.prenom}" />
 				<c:out value="${client.nom}" />
 			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Numero de compte</th>
-						<th>Type de compte</th>
-						<th>Solde</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${not empty client.compteEpargne}">
+			<div class="panel-body">
+				<table class="table">
+					<thead>
 						<tr>
-							<th scope="row"><c:out
-									value="${client.compteEpargne.numero}" /></th>
-							<td><c:out value="Compte Epargne" /></td>
-							<td><c:out value="${client.compteEpargne.solde}" /></td>
+							<th>Numero de compte</th>
+							<th>Type de compte</th>
+							<th>Solde</th>
 						</tr>
-					</c:if>
-					<c:if test="${not empty client.compteCourant}">
-						<tr>
-							<th scope="row"><c:out
-									value="${client.compteCourant.numero}" /></th>
-							<td><c:out value="Compte Courant" /></td>
-							<td><c:out value="${client.compteCourant.solde}" /></td>
-						</tr>
-					</c:if>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:if test="${not empty client.compteEpargne}">
+							<tr>
+								<th scope="row"><c:out
+										value="${client.compteEpargne.numero}" /></th>
+								<td><c:out value="Compte Epargne" /></td>
+								<td><c:out value="${client.compteEpargne.solde} Euro" /></td>
+							</tr>
+						</c:if>
+						<c:if test="${not empty client.compteCourant}">
+							<tr>
+								<th scope="row"><c:out
+										value="${client.compteCourant.numero}" /></th>
+								<td><c:out value="Compte Courant" /></td>
+								<td><c:out value="${client.compteCourant.solde} Euro" /></td>
+							</tr>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
 		<br>
