@@ -9,21 +9,21 @@ import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.ConseillerService;
 
 public class ConseillerServiceTest {
-	
+
 	private static Conseiller conseillerTest, conseillerTest2, conseillerTest3;
 	private static ConseillerService conseillerService;
 
 	@BeforeClass
-	public static void aFaireAvantLesTests(){
-	conseillerTest= new Conseiller("Test", "test", "monsieur", "test", "password");
-	conseillerTest2= new Conseiller("Test", "test", "monsieur", "test2", "password");
-	conseillerTest3= new Conseiller("Test", "test", "monsieur", "test3", "password");
-	conseillerService = new ConseillerService();
-	conseillerService.creerConseiller(conseillerTest2);
-	conseillerService.creerConseiller(conseillerTest3);
-		
+	public static void aFaireAvantLesTests() {
+		conseillerTest = new Conseiller("Test", "test", "monsieur", "test", "password");
+		conseillerTest2 = new Conseiller("Test", "test", "monsieur", "test2", "password");
+		conseillerTest3 = new Conseiller("Test", "test", "monsieur", "test3", "password");
+		conseillerService = new ConseillerService();
+		conseillerService.creerConseiller(conseillerTest2);
+		conseillerService.creerConseiller(conseillerTest3);
+
 	}
-	
+
 	@Test
 	public void testCreerConseiller() {
 		boolean status;
@@ -44,7 +44,7 @@ public class ConseillerServiceTest {
 		boolean status;
 		status = conseillerService.supprimerConseiller(conseillerTest2.getLogin());
 		Assert.assertTrue(status);
-		
+
 	}
 
 	@Test
@@ -53,9 +53,9 @@ public class ConseillerServiceTest {
 		conseiller = conseillerService.lireConseiller(conseillerTest3.getLogin());
 		Assert.assertNotNull(conseiller);
 	}
-	
+
 	@AfterClass
-	public static void aFaireApresLesTests(){
+	public static void aFaireApresLesTests() {
 		conseillerService.supprimerConseiller(conseillerTest.getLogin());
 		conseillerService.supprimerConseiller(conseillerTest3.getLogin());
 	}
