@@ -66,7 +66,8 @@ public class AuthServlet extends HttpServlet {
 			HttpSession maSession = request.getSession();
 			maSession.setAttribute("conseiller", conseiller);
 			maSession.setAttribute("listeClient", listeClient);
-
+			maSession.setAttribute("resultVirement", false);
+			maSession.setAttribute("resultUpdate", false);
 			dispatcher = request.getRequestDispatcher("clientsoperations.jsp");
 		} else {
 			dispatcher = request.getRequestDispatcher("loginincorrect.html");

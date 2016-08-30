@@ -26,6 +26,18 @@
 	</nav>
 	<!-- Banner -->
 	<div id="banner">
+	<tbody>
+		<c:if test="${resultVirement}">
+			<div class="alert alert-success" role="alert">Virement effectué</div>
+		</c:if>
+	</tbody>
+	
+	<tbody>
+		<c:if test="${resultUpdate}">
+			<div class="alert alert-success" role="alert">Mise à jour Client effectué</div>
+		</c:if>
+	</tbody>
+	
 		<h2>Application ProxiBanque V2</h2>
 		<p>Bienvenue <c:out value="${conseiller.nom}"/> sur l'application ProxiBanque V2</p>
 		<br>
@@ -67,6 +79,7 @@
  		</form>
  		
  		<br>
+
 		<form action="ConsultCompteServlet" method="Post" class="form-inline form-group container">
    				<label for="idClient2">ID Client </label>
    				<select class="form-control" name="idClient" id="idClient2">
@@ -79,14 +92,9 @@
  		
  		<br>
 		<form action="VirementServlet" method="Post" class="form-inline form-group container">
-   				<label for="idClient3">ID Client </label>
-   				<select class="form-control" name="idClient" id="idClient3">
-			    	<c:forEach var="Client" items="${listeClient}">
-							<option><c:out value="${Client.id}"/></option>
-					</c:forEach>
-			    </select>
 				<button type="submit" class="btn btn-success">Effectuer Virement</button>
  		</form>
+
 	</div>
 
 	<!-- Section 1  -->

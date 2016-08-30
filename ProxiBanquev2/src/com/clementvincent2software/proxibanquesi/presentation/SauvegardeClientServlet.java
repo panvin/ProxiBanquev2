@@ -69,11 +69,18 @@ public class SauvegardeClientServlet extends HttpServlet {
 		clientAModifier.setEmail(email);
 		clientAModifier.setCoordonnees(nouvCoordonnes);
 		
-		clientService.modifierClient(idClient, clientAModifier);
+		Boolean resultUpdate = clientService.modifierClient(idClient, clientAModifier);
 		
 		// Etape 3 : Réponse à l'utilisateur
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("clientsoperations.jsp");
+		if (resultUpdate == true) {
+			maSession.setAttribute("resultUpdate", resultUpdate);
+			maSession.setAttribute("resultVirement", false);
+			
+			dispatcher = request.getRequestDispatcher("clientsoperations.jsp");
+		} else {
+			dispatcher = request.getRequestDispatcher("virementerror.jsp");
+		}
 		dispatcher.forward(request, response);
 	}
 }

@@ -1,7 +1,6 @@
 package com.clementvincent2software.proxibanquesi.presentation;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.clementvincent2software.proxibanquesi.domaine.Client;
-import com.clementvincent2software.proxibanquesi.service.ClientService;
+import com.clementvincent2software.proxibanquesi.service.CompteService;
+
 
 /**
- * Servlet implementation class ConsultCompteServlet
+ * Servlet implementation class SauvegardeVirementServlet
  */
-@WebServlet("/ConsultCompteServlet")
-public class ConsultCompteServlet extends HttpServlet {
+@WebServlet("/SauvegardeVirementServlet")
+public class SauvegardeVirementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConsultCompteServlet() {
+    public SauvegardeVirementServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -43,20 +43,25 @@ public class ConsultCompteServlet extends HttpServlet {
 
 	protected void traitement(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Etape 1 : Récupération des paramètres de la requète
-		int idClient = Integer.parseInt(request.getParameter("idClient"));
-		
+			String compteDebiteur = request.getParameter("compteDebiteur");
+			String compteCrediteur = request.getParameter("compteCrediteur");
+			float montantVirement = Integer.parseInt(request.getParameter("montantVirement"));
+
 		// Etape 2 : Soumettre les paramètres de la requete à la couche service
-		ClientService clientService = new ClientService();
-		Client client =  clientService.lireClient(idClient);
+			CompteService compteService = new CompteService();
+			Boolean resultVirement;
+			resultVirement = compteService.virementCompteACompte(compteDebiteur, compteCrediteur, montantVirement);
 		
 		// Etape 3 : Réponse à l'utilisateur
-		RequestDispatcher dispatcher;
-		HttpSession maSession = request.getSession();
-		maSession.setAttribute("client", client);
-		maSession.setAttribute("resultUpdate", false);
-		maSession.setAttribute("resultVirement", false);
-		dispatcher = request.getRequestDispatcher("compteclient.jsp");		
-		dispatcher.forward(request, response);
-		
+			RequestDispatcher dispatcher;
+			if (resultVirement == true) {
+				HttpSession maSession = request.getSession();
+				maSession.setAttribute("resultVirement", resultVirement);
+				maSession.setAttribute("resultUpdate", false);
+				dispatcher = request.getRequestDispatcher("clientsoperations.jsp");
+			} else {
+				dispatcher = request.getRequestDispatcher("virementerror.jsp");
+			}
+			dispatcher.forward(request, response);
 	}
 }

@@ -40,63 +40,36 @@
 		<br>
 
 		<div class="container">
-			<form class="form-group row" action="SauvegardeClientServlet" method="Post">
+			<form action="SauvegardeVirementServlet" method="Post">
+			
+				<div class="form-group">
+				    <label for="compteDebiteur">Débiteur</label>
+				    <select class="form-control" id="compteDebiteur" name="compteDebiteur">
+				      <c:forEach var="Compte" items="${listeCompte}"> 
+				      <option><c:out value="${Compte.numero}"/></option>
+				      </c:forEach>
+				    </select>
+				  </div>
+ 				<br>
 				
-					<label for="nomClient" class="col-sm-2 col-form-label">Nom</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="nomClient" name="nomClient"
-							value="<c:out value="${lectureClient.nom}"/>">
+				<div class="form-group row">
+					<label for="compteCrediteur" class="col-sm-2 col-form-label">Créditeur</label>
+					<select class="form-control" id="compteCrediteur" name="compteCrediteur">
+				      <c:forEach var="Compte" items="${listeCompte}"> 
+				      <option><c:out value="${Compte.numero}"/></option>
+				      </c:forEach>
+				    </select>
+				  </div>
+ 				<br>
+
+				<label class="sr-only" for="montantVirement">Montant (en Euros)</label>
+    			<div class="input-group">
+      			<div class="input-group-addon">$</div>
+      			<input type="text" class="form-control" id="montantVirement" name="montantVirement" placeholder="montant">
+      			<div class="input-group-addon">.00</div>
+				</div>
 				<br>
-				</div>
-				
-				
-					<label for="prenomClient" class="col-sm-2 col-form-label">Prenom</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="prenomClient" name="prenomClient"
-							value="<c:out value="${lectureClient.prenom}"/>">
-				<br>
-				</div>
-				
-				
-					<label for="emailClient" class="col-sm-2 col-form-label">email</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="emailClient" name="emailClient"
-							value="<c:out value="${lectureClient.email}"/>">
-				<br>
-				</div>
-				
-				
-					<label for="adresseClient" class="col-sm-2 col-form-label">adresse</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="adresseClient" name="adresseClient"
-							value="<c:out value="${lectureClient.coordonnees.adresse}"/>">
-				<br>	
-				</div>
-				
-				
-					<label for="villeClient" class="col-sm-2 col-form-label">ville</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="villeClient" name="villeClient"
-							value="<c:out value="${lectureClient.coordonnees.ville}"/>">
-				<br>	
-				</div>
-				
-				
-					<label for="telClient" class="col-sm-2 col-form-label">telephone</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="telClient" name="telClient"
-							value="<c:out value="${lectureClient.coordonnees.telephone}"/>">
-				<br>	
-				</div>
-				
-					<label for="cpClient" class="col-sm-2 col-form-label">cp</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="cpClient" name="cpClient"
-							value="<c:out value="${lectureClient.coordonnees.cp}"/>">
-				<br>
-				</div>
-				
-				<button type="submit" class="btn btn-success btn-lg">Envoyer</button>
+				<button type="submit" class="btn btn-success">Transfer cash</button>
 				
 			</form>
 		</div>
