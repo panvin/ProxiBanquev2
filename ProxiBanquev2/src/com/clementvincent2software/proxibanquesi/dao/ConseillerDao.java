@@ -9,15 +9,20 @@ import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 
 /**
  * Classe ConseillerDao, permet la gestion des Conseillers en base
+ * 
  * @author Clement CASTRO et Vincent PANOUILLERES
  *
  */
 public class ConseillerDao {
-	
+
 	/**
 	 * Méthode permettant la création en base d'un nouveau conseiller en base
+	 * 
 	 * @param conseiller
-	 * @return Retourne true si la methode se deroule correctement, retourne false sinon
+	 *            L'objet conseiller qu'on souhaite entrer dans la base de
+	 *            données. (Objet de type Conseiller)
+	 * @return Retourne true si la methode se deroule correctement, retourne
+	 *         false sinon (booléen)
 	 */
 	public static boolean createConseiller(Conseiller conseiller) {
 		// INfomration d'accès à la base de données
@@ -35,7 +40,9 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "INSERT INTO Conseiller(nom, prenom, civilite, login, password) VALUES ('" + conseiller.getNom() + "','" + conseiller.getPrenom() + "','" + conseiller.getCivilite() + "','" + conseiller.getLogin() + "','" + conseiller.getPassword() + "');";
+			String sql = "INSERT INTO Conseiller(nom, prenom, civilite, login, password) VALUES ('"
+					+ conseiller.getNom() + "','" + conseiller.getPrenom() + "','" + conseiller.getCivilite() + "','"
+					+ conseiller.getLogin() + "','" + conseiller.getPassword() + "');";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 
@@ -60,9 +67,13 @@ public class ConseillerDao {
 	}
 
 	/**
-	 * Méthode permettant de récupérer les informations en base d'un conseiller à partir de son login
-	 * @param loginInit Login du conseiller
-	 * @return conseiller
+	 * Méthode permettant de récupérer les informations en base d'un conseiller
+	 * à partir de son login
+	 * 
+	 * @param loginInit
+	 *            Login du conseiller (String)
+	 * @return conseiller Le conseiller obtenu à partir du Login (Objet de type
+	 *         Conseiller).
 	 */
 	public static Conseiller readConseillerByLogin(String loginInit) {
 		// INformation d'acces à la base de donnees
@@ -74,8 +85,7 @@ public class ConseillerDao {
 		ResultSet rs = null;
 		Conseiller conseiller = null;
 		String nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller, passwordConseiller;
-		
-	
+
 		try {
 			// Etape 1: chargement du driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -83,7 +93,7 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "SELECT * FROM conseiller WHERE login='"+ loginInit +"';";
+			String sql = "SELECT * FROM conseiller WHERE login='" + loginInit + "';";
 			// Etape 4: Execution requête
 			rs = st.executeQuery(sql);
 			// Etape 5 : Parcours de resultset
@@ -93,9 +103,10 @@ public class ConseillerDao {
 				civiliteConseiller = rs.getString("civilite");
 				loginConseiller = rs.getString("login");
 				passwordConseiller = rs.getString("password");
-				conseiller = new Conseiller(nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller, passwordConseiller);
+				conseiller = new Conseiller(nomConseiller, prenomConseiller, civiliteConseiller, loginConseiller,
+						passwordConseiller);
 			}
-	
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -113,12 +124,18 @@ public class ConseillerDao {
 	}
 
 	/**
-	 * Méthode permettant de mettre à jour en base un conseiller à partir de son login
-	 * @param loginInit  Login du conseiller
-	 * @param newConseiller Objet Conseiller contenant les nouvelles informations
-	 * @return Retourne true si la methode se deroule correctement, retourne false sinon
+	 * Méthode permettant de mettre à jour en base un conseiller à partir de son
+	 * login
+	 * 
+	 * @param loginInit
+	 *            Login du conseiller (String)
+	 * @param newConseiller
+	 *            Objet Conseiller contenant les nouvelles informations (Objet
+	 *            de type Conseiller)
+	 * @return Retourne true si la methode se deroule correctement, retourne
+	 *         false sinon (booléen)
 	 */
-	public static boolean updateConseillerByLogin(String loginInit, Conseiller newConseiller){
+	public static boolean updateConseillerByLogin(String loginInit, Conseiller newConseiller) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
@@ -134,7 +151,10 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "UPDATE Conseiller SET nom = '" + newConseiller.getNom() + "', prenom = '" + newConseiller.getPrenom() + "', civilite = '" + newConseiller.getCivilite() + "', login = '" + newConseiller.getLogin() + "', password = '" + newConseiller.getPassword() + "' WHERE login='"+loginInit+ "';";
+			String sql = "UPDATE Conseiller SET nom = '" + newConseiller.getNom() + "', prenom = '"
+					+ newConseiller.getPrenom() + "', civilite = '" + newConseiller.getCivilite() + "', login = '"
+					+ newConseiller.getLogin() + "', password = '" + newConseiller.getPassword() + "' WHERE login='"
+					+ loginInit + "';";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -156,13 +176,16 @@ public class ConseillerDao {
 		return status;
 	}
 
-
 	/**
-	 * Méthode permettant de supprimer en base un conseiller à partir de son login
-	 * @param loginInit Login du conseiller
-	 * @return Retourne true si la methode se deroule correctement, retourne false sinon 
+	 * Méthode permettant de supprimer en base un conseiller à partir de son
+	 * login.
+	 * 
+	 * @param loginInit
+	 *            Login du conseiller (String).
+	 * @return Retourne true si la methode se deroule correctement, retourne
+	 *         false sinon (booléen).
 	 */
-	public static boolean deleteConseillerByLogin(String loginInit){
+	public static boolean deleteConseillerByLogin(String loginInit) {
 		// INformation d'acces à la base de donnees
 		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
@@ -178,7 +201,7 @@ public class ConseillerDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "DELETE FROM Conseiller WHERE login ='"+loginInit+"';";
+			String sql = "DELETE FROM Conseiller WHERE login ='" + loginInit + "';";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -199,5 +222,4 @@ public class ConseillerDao {
 		}
 		return status;
 	}
-
 }

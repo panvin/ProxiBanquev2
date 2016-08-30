@@ -21,6 +21,8 @@ public class ClientDao {
 	 * Méthode permettant la création en base d'un nouveau client en base
 	 * 
 	 * @param client
+	 *            L'objet client qui va être crée dans la base de donnée (objet Client)
+	 * @return Retourne true si la méthode se déroule bien sinon retourne false (booléen)
 	 */
 	public static boolean createClient(Client client) {
 		// INfomration d'accès à la base de données
@@ -68,7 +70,7 @@ public class ClientDao {
 	 * Méthode permettant de récupérer en base les informations de tout les
 	 * clients
 	 * 
-	 * @return collection de Client
+	 * @return Retourne une collection de clients (Collection<Client>)
 	 */
 	public static Collection<Client> readAllClient() {
 		// INformation d'acces à la base de donnees
@@ -98,7 +100,7 @@ public class ClientDao {
 				prenomClient = rs.getString("prenom");
 				civiliteClient = rs.getString("civilite");
 				idClient = rs.getInt("id");
-				email= rs.getString("email");
+				email = rs.getString("email");
 				collection.add(new Client(nomClient, prenomClient, civiliteClient, email, idClient));
 			}
 
@@ -123,8 +125,8 @@ public class ClientDao {
 	 * conseiller à partir de son login
 	 * 
 	 * @param logInit
-	 *            login du conseiller
-	 * @return Collection de Client
+	 *            login du conseiller (String)
+	 * @return Collection de Clients (Collection<Client>)
 	 */
 	public static Collection<Client> readClientByConseiller(String logInit) {
 		// INformation d'acces à la base de donnees
@@ -179,8 +181,9 @@ public class ClientDao {
 	 * partir de son identifiant
 	 * 
 	 * @param idInit
-	 *            identifiant du client
-	 * @return Client
+	 *            identifiant unique du client (int)
+	 * @return Client Retourne l'objet client correspondant à l'identifiant
+	 *         spécifié (Objet Client)
 	 */
 	public static Client readClientById(int idInit) {
 		// INformation d'acces à la base de donnees
@@ -235,9 +238,10 @@ public class ClientDao {
 	 * identifiant
 	 * 
 	 * @param idInit
-	 *            identifiant du Client à mettre à jour
+	 *            identifiant du Client à mettre à jour (int)
 	 * @param newClient
-	 *            Objet Client contenant les nouvelles informations
+	 *            Objet Client contenant les nouvelles informations (Client)
+	 * @return Retourne true si la méthode se déroule bien sinon retourne false (booléen)
 	 */
 	public static boolean updateClientById(int idInit, Client newClient) {
 		// INformation d'acces à la base de donnees
@@ -284,7 +288,9 @@ public class ClientDao {
 	 * identifiant
 	 * 
 	 * @param idInit
-	 *            identifiant du client à supprimer
+	 *            identifiant du client à supprimer (int)
+	 * 
+	 * @return Retourne true si la méthode se déroule bien sinon retourne false (booléen)
 	 */
 	public static boolean deleteClientById(int idInit) {
 		// INformation d'acces à la base de donnees
@@ -323,5 +329,4 @@ public class ClientDao {
 		}
 		return status;
 	}
-
 }

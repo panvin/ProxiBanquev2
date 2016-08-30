@@ -8,12 +8,26 @@ import java.sql.Statement;
 
 import com.clementvincent2software.proxibanquesi.domaine.Coordonnees;
 
+/**
+ * Classe de la couche DAO Elle permet de manipuler des Coordonnées dans la Base
+ * de données
+ * 
+ * @author Clement CASTRO et VIncent PANOUILLERES
+ *
+ */
 public class CoordonneesDao {
 
 	/**
 	 * Méthode permettant la création en base de coordoonnees pour un client.
-	 * @param coordonnees Passe en parametres l'objet coordonnees.
-	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs, retourne false sinon
+	 * 
+	 * @param coordonnees
+	 *            Passe en parametres l'objet coordonnees. (Objet de type
+	 *            Coordonnees)
+	 * @param clientId
+	 *            L'identifiant du client auquellles sont rattachées les
+	 *            coordonnées (int).
+	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs,
+	 *         retourne false sinon (booléen)
 	 */
 	public static boolean createCoordonnees(Coordonnees coordonnees, int clientId) {
 		// INfomration d'accès à la base de données
@@ -38,7 +52,7 @@ public class CoordonneesDao {
 			st.executeUpdate(sql);
 
 		} catch (SQLException e) {
-			status =false;
+			status = false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			status = false;
@@ -57,12 +71,14 @@ public class CoordonneesDao {
 		return status;
 	}
 
-	
 	/**
-	 * Méthode permettant de récupérer les coordonnees d'un client en base à partir de l'identifiant client.
+	 * Méthode permettant de récupérer les coordonnees d'un client en base à
+	 * partir de l'identifiant client.
 	 * 
-	 * @param idClient L'identifiant unique du client.
-	 * @return Retourne l'objet coordonnees correspondant à l'id client.
+	 * @param idClient
+	 *            L'identifiant unique du client. (int)
+	 * @return Retourne l'objet coordonnees correspondant à l'id client (Objet
+	 *         de type Coordonnees).
 	 */
 	public static Coordonnees readCoordonneesByIdClient(int idClient) {
 		// INformation d'acces à la base de donnees
@@ -111,10 +127,15 @@ public class CoordonneesDao {
 	}
 
 	/**
-	 * Méthode permettant de mettre à jour en base les coordonnees d'un lcient à partir de son identifiant.
-	 * @param idClient L'identifiant unique du client.
-	 * @param newCoordonnees Les coordonnees client à jour.
-	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs, retourne false sinon.
+	 * Méthode permettant de mettre à jour en base les coordonnees d'un lcient à
+	 * partir de son identifiant.
+	 * 
+	 * @param idClient
+	 *            L'identifiant unique du client (int).
+	 * @param newCoordonnees
+	 *            Les coordonnees client à jour (Objet de type Coordonnees).
+	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs,
+	 *         retourne false sinon (booléen).
 	 */
 	public static boolean updateCoordonneesByClientId(int idClient, Coordonnees newCoordonnees) {
 		// INformation d'acces à la base de donnees
@@ -158,9 +179,14 @@ public class CoordonneesDao {
 	}
 
 	/**
-	 * Méthode permettant de supprimer en base les coordonnes d'un client à partir de son identifiant unique
-	 * @param idClient L'identifiant unique du client dont on souhaite supprimer les coordonnees
-	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs, retourne false sinon
+	 * Méthode permettant de supprimer en base les coordonnes d'un client à
+	 * partir de son identifiant unique
+	 * 
+	 * @param idClient
+	 *            L'identifiant unique du client dont on souhaite supprimer les
+	 *            coordonnees (int).
+	 * @return Retourne true si la méthode arrive a se dérouler sans erreurs,
+	 *         retourne false sinon (booléen).
 	 */
 	public static boolean deleteCoordonneesByClientId(int idClient) {
 		// INformation d'acces à la base de donnees

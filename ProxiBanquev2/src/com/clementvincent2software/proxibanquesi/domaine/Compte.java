@@ -1,7 +1,7 @@
 package com.clementvincent2software.proxibanquesi.domaine;
 
 /**
- * Classe abstraite Compte, représente les comptes des clients de proxibanque
+ * Classe abstraite Compte, représente les comptes des clients de proxibanque C'est à partir de cette classe que sont construites les Classes CompteEpargne et CompteCourant. Contient le solde, le numero de compte, et la date d'ouverture du compte.
  * @author Clement CASTRO et Vincent PANOUILLERES
  *
  */
@@ -13,9 +13,9 @@ public abstract class Compte {
 	
 	/**
 	 * Constructeur de la classe Compte
-	 * @param numero
-	 * @param solde
-	 * @param dateOuverture
+	 * @param numero Le numero du compte (String)
+	 * @param solde Le solde du compte (float)
+	 * @param dateOuverture La date d'ouverture du compte (String)
 	 */
 	public Compte(String numero, Float solde, String dateOuverture) {
 		super();
@@ -26,7 +26,7 @@ public abstract class Compte {
 
 	/**
 	 * Méthode permettant d'obtenir le numéro du compte
-	 * @return
+	 * @return Le numero du compte (String)
 	 */
 	public String getNumero() {
 		return numero;
@@ -34,7 +34,7 @@ public abstract class Compte {
 
 	/**
 	 * Méthode permettant de modifier le numéro du compte
-	 * @param numero
+	 * @param numero Le numero du compte (String)
 	 */
 	public void setNumero(String numero) {
 		this.numero = numero;
@@ -42,7 +42,7 @@ public abstract class Compte {
 
 	/**
 	 * Méthode permettant d'obtenir le solde du compte
-	 * @return
+	 * @return Le solde du compte (float)
 	 */
 	public Float getSolde() {
 		return solde;
@@ -50,7 +50,7 @@ public abstract class Compte {
 
 	/**
 	 * Méthode permettant de modifier le solde du compte
-	 * @param solde
+	 * @param solde Le solde du compte (float)
 	 */
 	public void setSolde(Float solde) {
 		this.solde = solde;
@@ -58,7 +58,7 @@ public abstract class Compte {
 
 	/**
 	 * Méthode permettant d'obtenir la date d'ouverture du compte
-	 * @return
+	 * @return La date d'ouverture du compte (String)
 	 */
 	public String getDateOuverture() {
 		return dateOuverture;
@@ -66,7 +66,7 @@ public abstract class Compte {
 
 	/**
 	 * Méthode permettant de modifier la date d'ouverture du compte
-	 * @param dateOuverture
+	 * @param dateOuverture La date d'ouverture du compte (String)
 	 */
 	public void setDateOuverture(String dateOuverture) {
 		this.dateOuverture = dateOuverture;
