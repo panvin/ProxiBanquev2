@@ -12,7 +12,7 @@ import com.clementvincent2software.proxibanquesi.dao.CoordonneesDao;
 
 /**
  * Classe du domaine service qui concerne l'ensemble des services Clients. Cette
- * classe va permettre de: modifier, supprimer, creer, lire unclient et
+ * classe va permettre de: modifier, supprimer, creer, lire un client et
  * egalement d'obtenir la liste de tous les clients.
  * 
  * @author Clement CASTRO et Vincent PANOUILLERES
@@ -24,7 +24,10 @@ public class ClientService {
 	 * Cette classe permet de créer un client dans la base de donnée.
 	 * 
 	 * @param client
-	 *            Le client qu'on souhaite créer dans la base de donnée.
+	 *            Le client qu'on souhaite créer dans la base de donnée. (Objet
+	 *            de type CLient)
+	 * @return Retourne un booléen: true si tout se déroule sans problemes sinon
+	 *         false. (booléen)
 	 */
 	public boolean creerClient(Client client) {
 		boolean status, statusCreationClient, statusCreationCoord, statusCreationCompteEpargne,
@@ -52,10 +55,11 @@ public class ClientService {
 	 * (id).
 	 * 
 	 * @param idClient
-	 *            L'identifiant du client qu'on souhaite changer.
+	 *            L'identifiant du client qu'on souhaite changer. (int)
 	 * @param client
 	 *            L'objet client qui va permettre de mettre à jour le client
-	 *            dans la base de données.
+	 *            dans la base de données. (Objet de type Client)
+	 * 
 	 */
 	public boolean modifierClient(int idClient, Client client) {
 		boolean status;
@@ -85,24 +89,27 @@ public class ClientService {
 	 * 
 	 * @param idClient
 	 *            L'identifiant (id) du client dont on souhaite consulter les
-	 *            données.
-	 * @return
+	 *            données. (int)
+	 * @return Retourne un booléen: true si tout se déroule sans problemes sinon
+	 *         false. (booléen)
 	 */
 	public Client lireClient(int idClient) {
 		Client client = ClientDao.readClientById(idClient);
 		Coordonnees coordClient = CoordonneesDao.readCoordonneesByIdClient(idClient);
 		client.setCoordonnees(coordClient);
-			CompteEpargne compteEpargneClient = (CompteEpargne) CompteDao.readCompteByClientAndByType(idClient, "Epargne");	
-			client.setCompteEpargne(compteEpargneClient);
-			CompteCourant compteCourantClient = (CompteCourant) CompteDao.readCompteByClientAndByType(idClient, "Courant");	
-			client.setCompteCourant(compteCourantClient);
+		CompteEpargne compteEpargneClient = (CompteEpargne) CompteDao.readCompteByClientAndByType(idClient, "Epargne");
+		client.setCompteEpargne(compteEpargneClient);
+		CompteCourant compteCourantClient = (CompteCourant) CompteDao.readCompteByClientAndByType(idClient, "Courant");
+		client.setCompteCourant(compteCourantClient);
 		return client;
 	}
 
 	/**
-	 * Cette méthode permet de recuperer une liste de l'ensemble des clients qui existent.
+	 * Cette méthode permet de recuperer une liste de l'ensemble des clients qui
+	 * existent.
 	 * 
 	 * @return Cette methode retourne une liste de Client sous forme d'ArrayList
+	 *         (ArrayList<Client>)
 	 */
 	public ArrayList<Client> lireTousLesCLients() {
 		ArrayList<Client> listeClient;
@@ -117,8 +124,9 @@ public class ClientService {
 	 * 
 	 * @param login
 	 *            Le login du conseiller responsable des clients dont on veut la
-	 *            liste
+	 *            liste (String).
 	 * @return Cette methode retourne une liste de Client sous forme d'ArrayList
+	 *         (ArrayList<Client>)
 	 */
 	public ArrayList<Client> lireClientsParConseiller(String login) {
 		ArrayList<Client> listeClient;
