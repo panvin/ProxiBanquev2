@@ -25,7 +25,7 @@
 					ProxiBanque</a></li>
 		</ul>
 		<ul class="nav navbar-right">
-			<li role="presentation"><a href="index.html"><span
+			<li role="presentation"><a href="LogOutServlet"><span
 					class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
 					Deconnexion</a></li>
 		</ul>

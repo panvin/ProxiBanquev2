@@ -58,9 +58,9 @@
 		 	<c:forEach var="Client" items="${listeClient}">
 				<tr>
 					<th scope="row"><c:out value="${Client.id}"/></th>
-		     	 	<td><c:out value="${Client.civilite}"/></td>
-		      		<td><c:out value="${Client.nom}"/></td>
-		      		<td><c:out value="${Client.prenom}"/></td>
+		     	 	<th><c:out value="${Client.civilite}"/></th>
+		      		<th><c:out value="${Client.nom}"/></th>
+		      		<th><c:out value="${Client.prenom}"/></th>
 				</tr>
 			</c:forEach>
 		  </tbody>

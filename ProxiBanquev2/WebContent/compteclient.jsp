@@ -26,7 +26,7 @@
 					ProxiBanque</a></li>
 		</ul>
 		<ul class="nav navbar-right">
-			<li role="presentation"><a href="index.html"><span
+			<li role="presentation"><a href="LogOutServlet"><span
 					class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
 					Deconnexion</a></li>
 		</ul>
@@ -63,16 +63,16 @@
 							<tr>
 								<th scope="row"><c:out
 										value="${client.compteEpargne.numero}" /></th>
-								<td><c:out value="Compte Epargne" /></td>
-								<td><c:out value="${client.compteEpargne.solde} Euro" /></td>
+								<th><c:out value="Compte Epargne" /></th>
+								<th><c:out value="${client.compteEpargne.solde} Euro" /></th>
 							</tr>
 						</c:if>
 						<c:if test="${not empty client.compteCourant}">
 							<tr>
 								<th scope="row"><c:out
 										value="${client.compteCourant.numero}" /></th>
-								<td><c:out value="Compte Courant" /></td>
-								<td><c:out value="${client.compteCourant.solde} Euro" /></td>
+								<th><c:out value="Compte Courant" /></th>
+								<th><c:out value="${client.compteCourant.solde} Euro" /></th>
 							</tr>
 						</c:if>
 					</tbody>
