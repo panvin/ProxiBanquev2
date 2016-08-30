@@ -53,7 +53,7 @@
  				<br>
 				
 				<div class="form-group row">
-					<label for="compteCrediteur" class="col-sm-2 col-form-label">Créditeur</label>
+					<label for="compteCrediteur">Créditeur</label>
 					<select class="form-control" id="compteCrediteur" name="compteCrediteur">
 				      <c:forEach var="Compte" items="${listeCompte}"> 
 				      <option><c:out value="${Compte.numero}"/></option>
