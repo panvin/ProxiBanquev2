@@ -2,8 +2,10 @@ package com.clementvincent2software.proxibanquesi.service.test;
 
 import java.util.ArrayList;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.clementvincent2software.proxibanquesi.domaine.Client;
@@ -12,16 +14,18 @@ import com.clementvincent2software.proxibanquesi.service.ClientService;
 
 public class ClientServiceTest {
 	
-	Client clientTest;
-	Conseiller conseillerTest;
-	ClientService clientService;
+	private static Client clientTest, clientTest2;
+	private static Conseiller conseillerTest;
+	private static ClientService clientService;
 	
-	@Before
-	public void avantChaqueTest(){
+	@BeforeClass
+	public static void avantClasse(){
 		
 		conseillerTest = new Conseiller("responsable", "antoine", "monsieur", "login", "password");
-		clientTest = new Client("dupond", "toto", "monsieur", "asez@fr.com", "120 rue factice", "Lyon", "0102030405", "69003", 1, conseillerTest, null, null);
+		clientTest = new Client("dupond", "toto", "monsieur", "asez@fr.com", "120 rue factice", "Lyon", "0102030405", "69003", 1500, conseillerTest, null, null);
+		clientTest2 = new Client("dupond", "soso", "madame", "asez@fr.com", "120 rue factice", "Lyon", "0102030405", "69003", 1501, conseillerTest, null, null);
 		clientService = new ClientService();
+		clientService.creerClient(clientTest2);
 	}
 
 	@Test
@@ -36,7 +40,7 @@ public class ClientServiceTest {
 	public void testLireClient() {
 		
 		Client testClient;
-		testClient = clientService.lireClient(4);
+		testClient = clientService.lireClient(1501);
 		Assert.assertNotNull(testClient);
 	}
 	
@@ -44,7 +48,7 @@ public class ClientServiceTest {
 	public void testModificationClient() {
 		
 		boolean status; 
-		status = clientService.modifierClient(2, clientTest);
+		status = clientService.modifierClient(1500, clientTest);
 		Assert.assertTrue(status);
 	}
 
@@ -62,5 +66,10 @@ public class ClientServiceTest {
 		ArrayList<Client> listeClient;
 		listeClient = clientService.lireTousLesCLients();
 		Assert.assertNotNull(listeClient);
+	}
+	
+	@AfterClass
+	public static void apresClasse(){
+		clientService.suppressionClient(clientTest2.getId());		
 	}
 }
