@@ -54,19 +54,38 @@
 		  </tbody>
 		</table>
 	</div>
-	</div>
 
-		<div class="form-group container">
-    		<label for="exampleSelect1">Sélectionner une opération</label>
-   				<select class="form-control" id="exampleSelect1">
-			      <option>1</option>
-			      <option>2</option>
-			      <option>3</option>
-			      <option>4</option>
-			      <option>5</option>
+	<br>
+		<div action="EditClientServlet" method="Post" class="form-inline form-group container">
+   				<select class="form-control" name="idClient">
+			    	<c:forEach var="Client" items="${listeClient}">
+							<option><c:out value="${Client.id}"/></option>
+					</c:forEach>
 			    </select>
+				<button type="submit" class="btn btn-success">Edition du Client</button>
  		</div>
-
+ 		
+ 		<br>
+		<div action="ConsultCompteServlet" method="Post" class="form-inline form-group container">
+   				<label class="sr-only">ID Client</label>
+   				<select class="form-control" name="idClient">
+			    	<c:forEach var="Client" items="${listeClient}">
+							<option><c:out value="${Client.id}"/></option>
+					</c:forEach>
+			    </select>
+				<button type="submit" class="btn btn-success">Consulter Compte</button>
+ 		</div>
+ 		
+ 		<br>
+		<div action="VirementServlet" method="Post" class="form-inline form-group container">
+   				<select class="form-control" name="idClient">
+			    	<c:forEach var="Client" items="${listeClient}">
+							<option><c:out value="${Client.id}"/></option>
+					</c:forEach>
+			    </select>
+				<button type="submit" class="btn btn-success">Effectuer Virement</button>
+ 		</div>
+	</div>
 
 	<!-- Section 1  -->
 	<div id="one" class="container-fluid">
