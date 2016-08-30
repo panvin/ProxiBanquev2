@@ -178,7 +178,7 @@ public class CoordonneesDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "DELETE FROM coordonnees WHERE idClient =" + idClient + ";";
+			String sql = "DELETE FROM coordonnees WHERE idClient ='" + idClient + "';";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {

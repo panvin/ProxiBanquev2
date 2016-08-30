@@ -40,7 +40,7 @@ public class ClientDao {
 			st = cn.createStatement();
 			String sql = "INSERT INTO Client(nom, prenom, civilite, email, id, idconseiller) VALUES ('"
 					+ client.getNom() + "','" + client.getPrenom() + "','" + client.getCivilite() + "','"
-					+ client.getEmail() + "','" + client.getId() + "','" + client.getMonConseiller() + "');";
+					+ client.getEmail() + "','" + client.getId() + "','" + client.getMonConseiller().getLogin() + "');";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 
@@ -299,7 +299,7 @@ public class ClientDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "DELETE FROM Client WHERE id =" + idInit + ";";
+			String sql = "DELETE FROM Client WHERE id ='" + idInit + "';";
 			// Etape 4: Execution requête
 			st.executeUpdate(sql);
 		} catch (SQLException e) {

@@ -88,21 +88,32 @@ public class CompteService {
 	 * @param compteACrediter Le compte à crediter
 	 * @param montant Le montant du virement.
 	 */
-	public void virementCompteACompte(String numCompteADebiter, String numCompteACrediter, float montant){
+	public boolean virementCompteACompte(String numCompteADebiter, String numCompteACrediter, float montant){
 		
+		boolean statusCompteADebiter, statusCompteACrediter;
 		float soldeCompteADebiter = CompteDao.readCompteByNum(numCompteADebiter).getSolde() - montant;
 		float soldeCompteACrediter = CompteDao.readCompteByNum(numCompteACrediter).getSolde() + montant;
 
-		CompteDao.updateCompteByNum(numCompteADebiter, soldeCompteADebiter);
-		CompteDao.updateCompteByNum(numCompteACrediter, soldeCompteACrediter);
+		statusCompteADebiter  = CompteDao.updateCompteByNum(numCompteADebiter, soldeCompteADebiter);
+		statusCompteACrediter = CompteDao.updateCompteByNum(numCompteACrediter, soldeCompteACrediter);
+		
+		return (statusCompteADebiter && statusCompteACrediter);
 	}
 	
 	/**
 	 * Cette méthode permet de supprimer un compte de la base de donnée à partir du numero de compte
 	 * @param numeroCompte Le numero du compte à supprimer.
 	 */
-	public void supprimerCompte(String numeroCompte){
-		CompteDao.deleteCompteByNum(numeroCompte);		
+	public boolean supprimerCompte(String numeroCompte){
+		boolean status;
+		status = CompteDao.deleteCompteByNum(numeroCompte);	
+		return status;
+	}
+	
+	public boolean supprimerCompteParClient(int idClient){
+		boolean status;
+		status = CompteDao.deleteCompteByIdClient(idClient);
+		return status;
 	}
 	
 	/**

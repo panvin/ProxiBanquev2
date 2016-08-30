@@ -70,9 +70,9 @@ public class ClientService {
 	 */
 	public boolean suppressionClient(int idClient) {
 		boolean status;
-		status = ClientDao.deleteClientById(idClient);
 		CoordonneesDao.deleteCoordonneesByClientId(idClient);
 		CompteDao.deleteCompteByIdClient(idClient);
+		status = ClientDao.deleteClientById(idClient);
 		return status;
 
 	}

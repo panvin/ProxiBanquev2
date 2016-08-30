@@ -1,9 +1,8 @@
 package com.clementvincent2software.proxibanquesi.service.test;
 
-import static org.junit.Assert.*;
-
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.clementvincent2software.proxibanquesi.domaine.Client;
@@ -20,25 +19,23 @@ import com.clementvincent2software.proxibanquesi.service.CompteService;
  */
 public class CompteServiceTest {
 
-	private Compte compteEpargne, compteCourant;
-	private CompteService compteService;
-	private Client client;
+	private static Compte compteEpargne, compteCourant, compteCourant2;
+	private static CompteService compteService;
+	private static Client client, client2;
 	
-	/**
-	 * Methode a realiser avant chaque test. Elle va créer mettre en memoire des données pour les tests: une instance d'un compte epargne, une instance d'un compte courant, une instance d'un service compte.
-	 */
-	@Before
-	public void avantChaqueTest(){
+	@BeforeClass
+	public static void avantChaqueTest(){
 		
 		compteService = new CompteService();
-		compteEpargne = new CompteEpargne("01234", (float)152000, "15 fevrier 2016");
-		compteCourant = new CompteCourant("01234", (float)152000, "15 fevrier 2016");
-		client = new Client("dupond", "jean", "monsieur", 4);
+		compteEpargne = new CompteEpargne("01234", (float)152000, "15/02/2016");
+		compteCourant = new CompteCourant("012345", (float)152000, "15/02/2016");
+		compteCourant2 = new CompteCourant("012346", (float)152000, "15/02/2016");
+		client = new Client("dupond", "toto", "monsieur", 2);
+		client2 = new Client("test", "test", "madame", 4);
+		compteService.ajouterCompte( client, "Courant", "1357", (float) 12000, "15/02/2016");
+		compteService.ajouterCompte( client, "Epargne", "2468", (float) 15000, "15/02/2016");
 	}
 		
-	/**
-	 * Teste l'ajout de compte
-	 */
 	@Test
 	public void testAjouterCompte() {
 		boolean status;
@@ -46,62 +43,61 @@ public class CompteServiceTest {
 		Assert.assertTrue(status);
 	}
 
-//	/**
-//	 * Teste la creation de compte courant
-//	 */
-//	@Test
-//	public void testCreerCompteCourant() {
-//		boolean status;
-//		status = compteService.creerCompteCourant(client, "1234567", (float) 12500, new Date(15,"fevrier", 2016));
-//		Assert.assertTrue(status);
-//	}
-//	
-//	/**
-//	 *  Teste la creation de compte epargne
-//	 */
-//	@Test
-//	public void testCreerCompteEpargne() {
-//		boolean status;
-//		status = compteService.creerCompteEpargne(client, "1247893654", (float) 12500, "15 fevrier 2016"));
-//		Assert.assertTrue(status);
-//	}
-
-//	/**
-//	 * Teste le virement compte a compte
-//	 */
-//	@Test
-//	public void testVirementCompteACompte() {
-//		float soldeInitial = compteEpargne.getSolde();
-//		compteService.virementCompteACompte(compteEpargne, compteCourant, 140);
-//		Assert.assertTrue(soldeInitial>compteEpargne.getSolde());
-//	}
-//	
-//	public void testVirementCompteACompte2() {
-//		float soldeInitial = compteEpargne.getSolde();
-//		compteService.virementCompteACompte(compteEpargne, compteCourant, 140);
-//		Assert.assertTrue(soldeInitial == (compteEpargne.getSolde()+140));
-//	}
-//	
-//	public void testVirementCompteACompte3() {
-//		float soldeInitial = compteCourant.getSolde();
-//		compteService.virementCompteACompte(compteEpargne, compteCourant, 140);
-//		Assert.assertTrue(soldeInitial<compteCourant.getSolde());
-//	}
-//	
-//	public void testVirementCompteACompte4() {
-//		float soldeInitial = compteCourant.getSolde();
-//		compteService.virementCompteACompte(compteEpargne, compteCourant, 140);
-//		Assert.assertTrue(soldeInitial == (compteEpargne.getSolde() - 140));
-//	}
+	@Test
+	public void testCreerCompteCourant() {
+		boolean status;
+		status = compteService.creerCompteCourant(client2, "1234567", (float) 12500, "15/02/2016");
+		Assert.assertTrue(status);
+	}
+	
+	@Test
+	public void testCreerCompteEpargne() {
+		boolean status;
+		status = compteService.creerCompteEpargne(client2, "1247893654", (float) 12500, "15 fevrier 2016");
+		Assert.assertTrue(status);
+	}
 
 	@Test
-	public void testSupprimerClient() {
-		fail("Not yet implemented");
+	public void testVirementCompteACompte() {
+		boolean status;
+		status = compteService.virementCompteACompte("1357", "2468", (float) 140);
+		Assert.assertTrue(status);
+	}
+	
+	@Test
+	 public void testVirementCompteACompte2() {
+		boolean status;
+		status = compteService.virementCompteACompte("1357", "2468", (float) 140);
+		Assert.assertTrue(status);
+	}
+	
+	@Test
+	public void testSupprimerCompteParNumero() {
+		boolean status;
+		compteService.ajouterCompte( client, "Courant", compteCourant.getNumero(), compteCourant.getSolde(), compteCourant.getDateOuverture());
+		status = compteService.supprimerCompte(compteCourant.getNumero());
+		Assert.assertTrue(status);
+	}
+	
+	@Test
+	public void testSupprimerCompteParClient(){
+		boolean status;
+		compteService.ajouterCompte( client2, "Courant", compteCourant2.getNumero(), compteCourant2.getSolde(), compteCourant2.getDateOuverture());
+		status = compteService.supprimerCompteParClient(4);
+		Assert.assertTrue(status);
 	}
 
 	@Test
 	public void testConsulterCompte() {
-		fail("Not yet implemented");
+		Compte compteTest;
+		compteTest = compteService.consulterCompte("01234");
+		Assert.assertNotNull(compteTest);
 	}
-
+	
+	@After
+	public void apresLesTests(){
+		compteService.supprimerCompteParClient(4);
+		compteService.supprimerCompteParClient(2);
+		
+	}
 }

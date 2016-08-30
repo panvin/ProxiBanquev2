@@ -75,7 +75,7 @@ public class CompteDao {
 	 */
 	public static Compte readCompteByNum(String numCompte) {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -101,7 +101,7 @@ public class CompteDao {
 				typeCompte = rs.getString("type");
 				numeroCompte = rs.getString("numero");
 				soldeCompte = rs.getFloat("solde");
-				idClient = rs.getInt("id");
+				idClient = rs.getInt("idClient");
 				dateCompte = rs.getString("dateouverture");
 				if (typeCompte.equals("epargne")) {
 					compte = new CompteEpargne(numeroCompte, soldeCompte, dateCompte,
@@ -136,7 +136,7 @@ public class CompteDao {
 	 */
 	public static boolean updateCompteByNum(String numCompte, float newSolde) {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -180,7 +180,7 @@ public class CompteDao {
 	 */
 	public static boolean deleteCompteByNum(String numCompte) {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
@@ -224,7 +224,7 @@ public class CompteDao {
 	 */
 	public static boolean deleteCompteByIdClient(int idClient) {
 		// INformation d'acces à la base de donnees
-		String url = "jdbc:mysql://localhost/formation";
+		String url = "jdbc:mysql://localhost/ProxiBanque";
 		String login = "root";
 		String passwd = "";
 		Connection cn = null;
