@@ -20,7 +20,7 @@
 			  <li role="presentation"><a href="clientsoperations.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil ProxiBanque</a></li>
 			</ul>
 			<ul class="nav navbar-right">
-			  <li role="presentation"><a href="index.html"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>  Deconnexion</a></li>
+			  <li role="presentation"><a href="LogOutServlet"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>  Deconnexion</a></li>
 			</ul>
 		</div>
 	</nav>
