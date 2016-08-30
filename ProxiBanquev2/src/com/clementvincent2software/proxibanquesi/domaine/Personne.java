@@ -1,20 +1,26 @@
 package com.clementvincent2software.proxibanquesi.domaine;
 
 /**
- * Classe Personne, représente les personnes qui interviennent dans le SI
+ * Classe Abstraite Personne, représente les personnes qui interviennent dans le
+ * SI
+ * 
  * @author Clement CASTRO et Vincent PANOUILLERES
  */
 public abstract class Personne {
-	
+
 	private String nom;
 	private String prenom;
 	private String civilite;
-	
+
 	/**
 	 * Constructeur de la classe Personne
-	 * @param nom nom de la personne
-	 * @param prenom prenom de la personne
-	 * @param civilite civilité de la personne (Homme/Femme)
+	 * 
+	 * @param nom
+	 *            Le nom de la personne (String)
+	 * @param prenom
+	 *            Le prenom de la personne (String)
+	 * @param civilite
+	 *            La civilité de la personne (String)
 	 */
 	public Personne(String nom, String prenom, String civilite) {
 		super();
@@ -25,7 +31,8 @@ public abstract class Personne {
 
 	/**
 	 * Méthode permettant d'obtenir le nom de la personne
-	 * @return
+	 * 
+	 * @return Le nom de la personne (String)
 	 */
 	public String getNom() {
 		return nom;
@@ -33,7 +40,9 @@ public abstract class Personne {
 
 	/**
 	 * Méthode permettant de modifier le nom de la personne
+	 * 
 	 * @param nom
+	 *            Le nom de la personne (String)
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -41,7 +50,8 @@ public abstract class Personne {
 
 	/**
 	 * Méthode permettant d'obtenir le prenom de la personne
-	 * @return
+	 * 
+	 * @return Le prenom de la personne (String)
 	 */
 	public String getPrenom() {
 		return prenom;
@@ -49,7 +59,9 @@ public abstract class Personne {
 
 	/**
 	 * Méthode permettant de modifier le prenom de la personne
+	 * 
 	 * @param prenom
+	 *            Le prenom de la personne (String)
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
@@ -57,7 +69,8 @@ public abstract class Personne {
 
 	/**
 	 * Méthode permettant d'obtenir la civilité de la personne
-	 * @return
+	 * 
+	 * @return La civilité de la personne (String)
 	 */
 	public String getCivilite() {
 		return civilite;
@@ -65,11 +78,11 @@ public abstract class Personne {
 
 	/**
 	 * Méthode permettant de modifier la civilité de la personne
+	 * 
 	 * @param civilite
+	 *            La civilité de la personne (String)
 	 */
 	public void setCivilite(String civilite) {
 		this.civilite = civilite;
 	}
-	
-	
 }
