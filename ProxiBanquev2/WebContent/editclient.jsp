@@ -40,7 +40,7 @@
 		<br>
 
 		<div class="container">
-			<form>
+			<form action="SauvegardeClientServlet" method="Post">
 				<div class="form-group row">
 					<label for="nomClient" class="col-sm-2 col-form-label">Nom</label>
 					<div class="col-sm-10">

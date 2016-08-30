@@ -81,7 +81,7 @@
 		</div>
 
 		<br>
-
+</div>
 		<!-- Section 1  -->
 		<div id="one" class="container-fluid">
 
