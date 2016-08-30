@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.clementvincent2software.proxibanquesi.domaine.Conseiller;
 import com.clementvincent2software.proxibanquesi.service.ConseillerService;
 
-public class ConseillerServicetest {
+public class ConseillerServiceTest {
 	
 	private static Conseiller conseillerTest, conseillerTest2, conseillerTest3;
 	private static ConseillerService conseillerService;

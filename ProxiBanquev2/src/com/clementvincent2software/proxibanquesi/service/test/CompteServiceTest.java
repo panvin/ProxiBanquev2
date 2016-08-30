@@ -1,6 +1,6 @@
 package com.clementvincent2software.proxibanquesi.service.test;
 
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -94,8 +94,8 @@ public class CompteServiceTest {
 		Assert.assertNotNull(compteTest);
 	}
 	
-	@After
-	public void apresLesTests(){
+	@AfterClass
+	public static void apresLesTests(){
 		compteService.supprimerCompteParClient(4);
 		compteService.supprimerCompteParClient(2);
 		
