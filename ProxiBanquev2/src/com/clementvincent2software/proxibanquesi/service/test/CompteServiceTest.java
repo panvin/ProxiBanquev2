@@ -11,13 +11,7 @@ import com.clementvincent2software.proxibanquesi.domaine.CompteCourant;
 import com.clementvincent2software.proxibanquesi.domaine.CompteEpargne;
 import com.clementvincent2software.proxibanquesi.service.CompteService;
 
-/**
- * Classe de test de la classe Service compte (CompteService.java)
- * Cette classe regroupe l'ensemble des méthodes de tests unitaires réalisées surles méthodes de la classe Compte service
- * @author Clement CASTRO et VIncent PANOUILLERES
- *
- */
-public class CompteServiceTest {
+ class CompteServiceTest {
 
 	private static Compte compteEpargne, compteCourant, compteCourant2;
 	private static CompteService compteService;
