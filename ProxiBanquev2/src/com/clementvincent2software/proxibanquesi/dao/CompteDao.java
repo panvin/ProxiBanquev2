@@ -20,10 +20,14 @@ public class CompteDao {
 	/**
 	 * Méthode permettant de créer en base un compte.
 	 * 
-	 * @param compte Objet compte lié au compte qu'on souhaite créer.
-	 * @param typeCompte Le type de compte qui va être crée: "Courant" ou "Epargne".
-	 * @param idClient Identifiant du client titulaire du futur compte.
-	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie false sinon.
+	 * @param compte
+	 *            Objet compte lié au compte qu'on souhaite créer.
+	 * @param typeCompte
+	 *            Le type de compte qui va être crée: "Courant" ou "Epargne".
+	 * @param idClient
+	 *            Identifiant du client titulaire du futur compte.
+	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie
+	 *         false sinon.
 	 */
 	public static boolean createCompte(Compte compte, String typeCompte, int idClient) {
 		// INfomration d'accès à la base de données
@@ -68,10 +72,13 @@ public class CompteDao {
 	}
 
 	/**
-	 * Méthode permettant d'obtenir les informations d'un compte à partir de son numéro.
+	 * Méthode permettant d'obtenir les informations d'un compte à partir de son
+	 * numéro.
 	 * 
-	 * @param numCompte Le numéro du compte dont on souhaite obtenir des informations.
-	 * @return Retourne l'objet compte à partir du numero de compte specifie en parametre de la méthode.
+	 * @param numCompte
+	 *            Le numéro du compte dont on souhaite obtenir des informations.
+	 * @return Retourne l'objet compte à partir du numero de compte specifie en
+	 *         parametre de la méthode.
 	 */
 	public static Compte readCompteByNum(String numCompte) {
 		// INformation d'acces à la base de donnees
@@ -126,11 +133,15 @@ public class CompteDao {
 		}
 		return compte;
 	}
-	
+
 	/**
-	 * Cette methode permet de recuperer un compte à partir de son proprietaire et du type de compte.
-	 * @param idClient L'identifiant du client.
-	 * @param Type Le type de compte dont on cherche les informations.
+	 * Cette methode permet de recuperer un compte à partir de son proprietaire
+	 * et du type de compte.
+	 * 
+	 * @param idClient
+	 *            L'identifiant du client.
+	 * @param Type
+	 *            Le type de compte dont on cherche les informations.
 	 * @return Retourne un objet compte contenant les informations recherchées.
 	 */
 	public static Compte readCompteByClientAndByType(int idClient, String Type) {
@@ -152,7 +163,7 @@ public class CompteDao {
 			cn = DriverManager.getConnection(url, login, passwd);
 			// Etape 3 : Creation d'un statement
 			st = cn.createStatement();
-			String sql = "SELECT * FROM compte WHERE idClient='" + idClient + "'AND type='"+ Type +"';";
+			String sql = "SELECT * FROM compte WHERE idClient='" + idClient + "'AND type='" + Type + "';";
 			// Etape 4: Execution requête
 			rs = st.executeQuery(sql);
 			// Etape 5 : Parcours de resultset
@@ -160,12 +171,14 @@ public class CompteDao {
 				numeroCompte = rs.getString("numero");
 				soldeCompte = rs.getFloat("solde");
 				dateCompte = rs.getString("dateouverture");
-				if (Type.equals("epargne")) {
+				if (Type.equals("Epargne")) {
 					compte = new CompteEpargne(numeroCompte, soldeCompte, dateCompte,
 							ClientDao.readClientById(idClient));
-				} else
+				} else if (Type.equals("Courant")) {
 					compte = new CompteCourant(numeroCompte, soldeCompte, dateCompte,
 							ClientDao.readClientById(idClient));
+				} else
+					return null;
 			}
 
 		} catch (SQLException e) {
@@ -188,11 +201,15 @@ public class CompteDao {
 	}
 
 	/**
-	 * Méthode permettant de modifier en base le solde d'un compte à partir du numéro de compte.
+	 * Méthode permettant de modifier en base le solde d'un compte à partir du
+	 * numéro de compte.
 	 * 
-	 * @param numCompte Le numéro de compte qu'on souhaite mettre à jour.
-	 * @param newSolde Le nouveau solde du compte à mettre à jour.
-	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie false sinon.
+	 * @param numCompte
+	 *            Le numéro de compte qu'on souhaite mettre à jour.
+	 * @param newSolde
+	 *            Le nouveau solde du compte à mettre à jour.
+	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie
+	 *         false sinon.
 	 */
 	public static boolean updateCompteByNum(String numCompte, float newSolde) {
 		// INformation d'acces à la base de donnees
@@ -235,8 +252,10 @@ public class CompteDao {
 	/**
 	 * Méthode permettant de supprimer en base un compte à partir de son numéro.
 	 * 
-	 * @param numCompte Le numéro du compte à supprimer dans la base de données.
-	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie false sinon.
+	 * @param numCompte
+	 *            Le numéro du compte à supprimer dans la base de données.
+	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie
+	 *         false sinon.
 	 */
 	public static boolean deleteCompteByNum(String numCompte) {
 		// INformation d'acces à la base de donnees
@@ -275,12 +294,16 @@ public class CompteDao {
 		}
 		return status;
 	}
-	
+
 	/**
-	 * Méthode permettant de supprimer en base un compte à partir de l'identifiant client.
+	 * Méthode permettant de supprimer en base un compte à partir de
+	 * l'identifiant client.
 	 * 
-	 * @param idClient L'identifiant du client dont on souhaite supprimer les comptes.
-	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie false sinon.
+	 * @param idClient
+	 *            L'identifiant du client dont on souhaite supprimer les
+	 *            comptes.
+	 * @return Renvoie true si la méthode se déroule sans probleme, renvoie
+	 *         false sinon.
 	 */
 	public static boolean deleteCompteByIdClient(int idClient) {
 		// INformation d'acces à la base de donnees
