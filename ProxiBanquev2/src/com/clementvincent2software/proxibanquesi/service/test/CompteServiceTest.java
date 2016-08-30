@@ -39,7 +39,7 @@ public class CompteServiceTest {
 	@Test
 	public void testAjouterCompte() {
 		boolean status;
-		status = compteService.ajouterCompte( client, "Epargne", compteEpargne.getNumero(), compteEpargne.getSolde(), compteEpargne.getDateOuverture());
+		status = compteService.ajouterCompte( client2, "Epargne", compteEpargne.getNumero(), compteEpargne.getSolde(), compteEpargne.getDateOuverture());
 		Assert.assertTrue(status);
 	}
 
@@ -76,7 +76,7 @@ public class CompteServiceTest {
 	@Test
 	public void testConsulterCompte() {
 		Compte compteTest;
-		compteTest = compteService.consulterCompte("01234");
+		compteTest = compteService.consulterCompte("1357");
 		Assert.assertNotNull(compteTest);
 	}
 	
